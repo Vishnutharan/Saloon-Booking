@@ -1,0 +1,40 @@
+<div class="step">
+  <h2 class="step-title">1. Select a Service</h2>
+
+  <!-- Service List -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    <div *ngFor="let service of services$ | async"
+         class="service-card"
+         [class.selected]="selectedService?.id === service.id"
+         (click)="selectService(service)">
+      <h3 class="font-semibold text-lg mb-1">{{ service.name }}</h3>
+      <p class="text-sm text-gray-600">Price: ${{ service.price }}</p>
+      <p class="text-sm text-gray-600">Duration: {{ service.duration }}</p>
+    </div>
+    <!-- Loading/Empty State -->
+     <div *ngIf="!(services$ | async)?.length">
+       <p class="text-gray-500 col-span-full">Loading services...</p>
+     </div>
+  </div>
+
+  <!-- Service Details -->
+  <div class="mb-6 p-4 bg-gray-50 rounded-lg min-h-[100px] border border-gray-200">
+    <ng-container *ngIf="selectedService; else noServiceSelected">
+      <h4 class="font-semibold text-gray-800">{{ selectedService.name }}</h4>
+      <p class="text-sm text-gray-700 mt-1">{{ selectedService.description }}</p>
+      <p class="text-sm text-gray-700 mt-1"><strong>Price:</strong> ${{ selectedService.price }}</p>
+      <p class="text-sm text-gray-700 mt-1"><strong>Duration:</strong> {{ selectedService.duration }}</p>
+    </ng-container>
+    <ng-template #noServiceSelected>
+      <p class="text-gray-500">Select a service to see details.</p>
+    </ng-template>
+  </div>
+
+  <!-- Error Message -->
+  <div class="error-message mb-4 h-5">{{ errorMessage }}</div>
+
+  <!-- Navigation -->
+  <div class="flex justify-end">
+    <button (click)="proceed()" class="btn btn-primary" [disabled]="!selectedService">Next</button>
+  </div>
+</div>

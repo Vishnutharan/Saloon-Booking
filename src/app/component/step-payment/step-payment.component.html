@@ -1,0 +1,85 @@
+<div class="step">
+  <h2 class="step-title">5. Payment Details</h2>
+
+  <!-- Booking Summary -->
+  <div class="mb-6">
+    <h3 class="text-lg font-medium text-gray-800">Booking Summary:</h3>
+    <div class="mt-2 p-3 bg-gray-50 rounded-md text-sm space-y-1 border border-gray-200">
+      <ng-container *ngIf="bookingData?.service; else loadingSummary">
+        <p><strong>Service:</strong> {{ bookingData?.service?.name }}</p>
+        <p><strong>Time:</strong> {{ bookingData?.time }} - {{ getSlotEndTime(bookingData?.time ?? null) }}</p>
+        <p><strong>Seat:</strong> {{ bookingData?.seat || 'N/A' }}</p>
+        <p class="mt-2 pt-2 border-t border-gray-300">
+          <strong>Total Amount:</strong>
+          <span class="font-bold text-lg ml-1">${{ (bookingData?.service?.price ?? 0).toFixed(2) }}</span>
+        </p>
+      </ng-container>
+      <ng-template #loadingSummary>
+        <p>Loading summary...</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Payment Form -->
+  <form [formGroup]="paymentForm" class="space-y-4">
+    <!-- Payment Method -->
+    <div>
+      <label for="paymentMethod" class="block text-sm font-medium text-gray-700">Payment Method</label>
+      <select id="paymentMethod" formControlName="paymentMethod" class="input-field">
+        <option value="creditCard">Credit Card</option>
+        <option value="paypal">PayPal (Mock)</option>
+        <option value="cash">Cash at Saloon (Mock)</option>
+      </select>
+    </div>
+
+    <!-- Credit Card Details (Conditional) -->
+    <div *ngIf="showCreditCardDetails" class="space-y-4 border border-gray-200 p-4 rounded-md bg-gray-50">
+      <h4 class="text-md font-medium text-gray-700 mb-2">Enter Card Details</h4>
+      <!-- Card Number -->
+      <div>
+        <label for="cardNumber" class="block text-sm font-medium text-gray-700">Card Number</label>
+        <input type="text" id="cardNumber" formControlName="cardNumber" class="input-field" placeholder="XXXX XXXX XXXX XXXX"
+               [class.border-red-500]="cardNumber?.invalid && cardNumber?.touched">
+        <div *ngIf="cardNumber?.invalid && cardNumber?.touched" class="error-message">
+           <span *ngIf="cardNumber?.errors?.['required']">Card number is required.</span>
+           <span *ngIf="cardNumber?.errors?.['pattern']">Enter a valid 13-16 digit card number.</span>
+        </div>
+        <div *ngIf="cardNumber?.valid || !cardNumber?.touched" class="error-message"></div>
+      </div>
+
+      <!-- Expiry & CVC -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="cardExpiry" class="block text-sm font-medium text-gray-700">Expiry Date</label>
+          <input type="text" id="cardExpiry" formControlName="cardExpiry" class="input-field" placeholder="MM/YY"
+                 [class.border-red-500]="cardExpiry?.invalid && cardExpiry?.touched">
+            <div *ngIf="cardExpiry?.invalid && cardExpiry?.touched" class="error-message">
+             <span *ngIf="cardExpiry?.errors?.['required']">Expiry date is required.</span>
+             <span *ngIf="cardExpiry?.errors?.['pattern']">Use MM/YY format.</span>
+           </div>
+           <div *ngIf="cardExpiry?.valid || !cardExpiry?.touched" class="error-message"></div>
+        </div>
+        <div>
+          <label for="cardCVC" class="block text-sm font-medium text-gray-700">CVC</label>
+          <input type="text" id="cardCVC" formControlName="cardCVC" class="input-field" placeholder="XXX" maxlength="4"
+                 [class.border-red-500]="cardCVC?.invalid && cardCVC?.touched">
+           <div *ngIf="cardCVC?.invalid && cardCVC?.touched" class="error-message">
+             <span *ngIf="cardCVC?.errors?.['required']">CVC is required.</span>
+             <span *ngIf="cardCVC?.errors?.['pattern']">Use 3 or 4 digits.</span>
+           </div>
+           <div *ngIf="cardCVC?.valid || !cardCVC?.touched" class="error-message"></div>
+        </div>
+      </div>
+    </div> <!-- End Credit Card Details -->
+
+    <!-- General Form Error Message -->
+     <div class="error-message h-5">{{ formErrorMessage }}</div>
+
+  </form>
+
+  <!-- Navigation -->
+  <div class="mt-6 flex justify-between">
+    <button (click)="goBack()" class="btn btn-secondary">Previous</button>
+    <button (click)="proceed()" class="btn btn-primary" [disabled]="paymentForm.invalid">Pay Now (Mock)</button>
+  </div>
+</div>

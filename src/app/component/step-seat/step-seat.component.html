@@ -1,0 +1,29 @@
+<div class="step">
+  <h2 class="step-title">3. Choose Your Seat</h2>
+  <p class="mb-4 text-sm text-gray-600">Select an available seat for your appointment.</p>
+
+  <!-- Seat Selection -->
+  <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 mb-6 justify-items-center">
+     <div *ngFor="let seat of seats$ | async"
+          class="seat flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 text-lg font-medium"
+          [class.selected]="selectedSeat === seat.id"
+          [class.booked]="seat.isBooked"
+          [title]="seat.isBooked ? 'This seat is currently unavailable.' : ''"
+          (click)="selectSeat(seat)">
+       {{ seat.id }}
+     </div>
+      <!-- Loading/Empty State -->
+      <div *ngIf="!(seats$ | async)?.length">
+        <p class="text-gray-500 col-span-full">Loading seats...</p>
+      </div>
+  </div>
+
+  <!-- Error Message -->
+  <div class="error-message mb-4 h-5">{{ errorMessage }}</div>
+
+  <!-- Navigation -->
+  <div class="flex justify-between">
+    <button (click)="goBack()" class="btn btn-secondary">Previous</button>
+    <button (click)="proceed()" class="btn btn-primary" [disabled]="!selectedSeat">Next</button>
+  </div>
+</div>

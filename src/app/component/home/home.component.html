@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          Welcome to Saloon Booking
+        </div>
+        <div class="card-body">
+          <h2>Hello, {{ currentUser?.name || currentUser?.email }}!</h2>
+          <p>You have successfully logged in to the Saloon Booking application.</p>
+          
+          <div class="alert alert-info">
+            <strong>User Details:</strong>
+            <p>Email: {{ currentUser?.email }}</p>
+            <p>User ID: {{ currentUser?.userId }}</p>
+          </div>
+          
+          <div class="d-grid">
+            <button 
+              class="btn btn-danger" 
+              (click)="logout()"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

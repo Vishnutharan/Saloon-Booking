@@ -1,0 +1,46 @@
+<div class="step">
+  <h2 class="step-title">4. Your Information</h2>
+  <form [formGroup]="userInfoForm" class="space-y-4">
+    <!-- Name -->
+    <div>
+      <label for="userName" class="block text-sm font-medium text-gray-700">Full Name</label>
+      <input type="text" id="userName" formControlName="name" class="input-field"
+             [class.border-red-500]="name?.invalid && (name?.dirty || name?.touched)">
+      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="error-message">
+        <span *ngIf="name?.errors?.['required']">Name is required.</span>
+        <span *ngIf="name?.errors?.['minlength']">Name must be at least 2 characters.</span>
+      </div>
+      <div *ngIf="name?.valid || name?.pristine" class="error-message"></div> <!-- Placeholder -->
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <label for="userPhone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+      <input type="tel" id="userPhone" formControlName="phone" class="input-field" placeholder="e.g., 123-456-7890"
+             [class.border-red-500]="phone?.invalid && (phone?.dirty || phone?.touched)">
+       <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="error-message">
+        <span *ngIf="phone?.errors?.['required']">Phone number is required.</span>
+        <span *ngIf="phone?.errors?.['pattern']">Invalid phone format (e.g., 123-456-7890).</span>
+      </div>
+      <div *ngIf="phone?.valid || phone?.pristine" class="error-message"></div> <!-- Placeholder -->
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="userEmail" class="block text-sm font-medium text-gray-700">Email Address</label>
+      <input type="email" id="userEmail" formControlName="email" class="input-field" placeholder="you@example.com"
+             [class.border-red-500]="email?.invalid && (email?.dirty || email?.touched)">
+       <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error-message">
+        <span *ngIf="email?.errors?.['required']">Email is required.</span>
+        <span *ngIf="email?.errors?.['email']">Invalid email format.</span>
+      </div>
+      <div *ngIf="email?.valid || email?.pristine" class="error-message"></div> <!-- Placeholder -->
+    </div>
+  </form>
+
+  <!-- Navigation -->
+  <div class="mt-6 flex justify-between">
+    <button (click)="goBack()" class="btn btn-secondary">Previous</button>
+    <button (click)="proceed()" class="btn btn-primary" [disabled]="userInfoForm.invalid">Proceed to Payment</button>
+  </div>
+</div>

@@ -1,1 +1,105 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add original body/global styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5; /* Light gray background for the page */
+}
+
+/* Reusable component styles from original (can be adapted or kept global) */
+.step {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.75rem; /* 12px */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+.step-title {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600;
+    color: #1f2937; /* gray-800 */
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb; /* gray-200 */
+    padding-bottom: 0.75rem;
+}
+ .service-card, .time-slot, .seat {
+    border: 1px solid #e5e7eb; /* gray-200 */
+    border-radius: 0.5rem; /* 8px */
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.service-card:hover, .time-slot:hover:not(.booked), .seat:hover:not(.booked) {
+    border-color: #3b82f6; /* blue-500 */
+    box-shadow: 0 0 0 2px #bfdbfe; /* blue-200 */
+}
+.service-card.selected, .time-slot.selected, .seat.selected {
+    background-color: #eff6ff; /* blue-50 */
+    border-color: #3b82f6; /* blue-500 */
+    color: #1e40af; /* blue-800 */
+}
+ .time-slot.booked, .seat.booked {
+    background-color: #f3f4f6; /* gray-100 */
+    color: #9ca3af; /* gray-400 */
+    cursor: not-allowed;
+    border-color: #d1d5db; /* gray-300 */
+}
+.time-slot.booked:hover, .seat.booked:hover {
+    box-shadow: none;
+    border-color: #d1d5db;
+}
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem; /* 8px */
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.btn-primary {
+    background-color: #3b82f6; /* blue-500 */
+    color: white;
+}
+.btn-primary:hover:not(:disabled) {
+    background-color: #2563eb; /* blue-600 */
+}
+.btn-secondary {
+    background-color: #e5e7eb; /* gray-200 */
+    color: #374151; /* gray-700 */
+}
+.btn-secondary:hover:not(:disabled) {
+    background-color: #d1d5db; /* gray-300 */
+}
+.input-field {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db; /* gray-300 */
+    border-radius: 0.5rem; /* 8px */
+    margin-top: 0.25rem;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.input-field:focus {
+    border-color: #3b82f6; /* blue-500 */
+    box-shadow: 0 0 0 2px #bfdbfe; /* blue-200 */
+    outline: none;
+}
+.input-field.ng-invalid.ng-touched {
+    border-color: #ef4444; /* red-500 */
+}
+.error-message {
+    color: #ef4444; /* red-500 */
+    font-size: 0.875rem; /* 14px */
+    margin-top: 0.25rem;
+    min-height: 1.25rem; /* Reserve space */
+}
+/* Add Google Font import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');

@@ -1,0 +1,29 @@
+<div class="step">
+  <h2 class="step-title">2. Select Appointment Time</h2>
+  <p class="mb-4 text-sm text-gray-600">Available slots for today (1-hour duration):</p>
+
+  <!-- Time Slots -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-6">
+     <div *ngFor="let slot of timeSlots$ | async"
+          class="time-slot text-center"
+          [class.selected]="selectedTime === slot.time"
+          [class.booked]="slot.isBooked"
+          [title]="slot.isBooked ? 'This slot is already booked.' : ''"
+          (click)="selectTime(slot)">
+        {{ slot.time }} - {{ getSlotEndTime(slot.time) }}
+     </div>
+     <!-- Loading/Empty State -->
+      <div *ngIf="!(timeSlots$ | async)?.length">
+        <p class="text-gray-500 col-span-full">Loading time slots...</p>
+      </div>
+  </div>
+
+  <!-- Error Message -->
+  <div class="error-message mb-4 h-5">{{ errorMessage }}</div>
+
+  <!-- Navigation -->
+  <div class="flex justify-between">
+    <button (click)="goBack()" class="btn btn-secondary">Previous</button>
+    <button (click)="proceed()" class="btn btn-primary" [disabled]="!selectedTime">Next</button>
+  </div>
+</div>

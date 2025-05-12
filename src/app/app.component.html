@@ -1,4 +1,25 @@
-<main class="bg-slate-100 flex items-start justify-center min-h-screen p-4 sm:p-6 md:p-8">
-    <app-booking-wizard></app-booking-wizard>
-</main>
-<router-outlet></router-outlet> <!-- Keep if using routing elsewhere -->
+<div class="flex flex-col min-h-screen">
+  <nav class="bg-gray-800 p-4">
+    <div class="container mx-auto flex justify-center gap-4">
+      <button 
+        routerLink="/login"
+        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300">
+        Login
+      </button>
+      <button 
+        routerLink="/register"
+        class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">
+        Register
+      </button>
+      <button 
+        routerLink="/"
+        class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition duration-300">
+        Home
+      </button>
+    </div>
+  </nav>
+
+  <main class="flex-grow">
+    <router-outlet></router-outlet>
+  </main>
+</div>

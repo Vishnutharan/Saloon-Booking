@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { MessageService, AppMessage } from '../../services/message.service';
+import { MessageService, AppMessage } from '../../Services/message.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({

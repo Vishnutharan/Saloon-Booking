@@ -1,49 +1,35 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-// Import services
-import { BookingService } from '../../services/booking.service';
-import { MessageService } from '../../services/message.service';
-
-// Import child components
-import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
-import { MessageBoxComponent } from '../message-box/message-box.component';
-import { StepServiceComponent } from '../step-service/step-service.component';
-import { StepTimeComponent } from '../step-time/step-time.component';
-import { StepSeatComponent } from '../step-seat/step-seat.component';
-import { StepDetailsComponent } from '../step-details/step-details.component';
-import { StepPaymentComponent } from '../step-payment/step-payment.component';
-import { StepConfirmationComponent } from '../step-confirmation/step-confirmation.component';
+import { BookingService } from '../../Services/booking.service';
+import { MessageService } from '../../Services/message.service';
 import { BookingData } from '../../models/booking.model';
 
 @Component({
   selector: 'app-booking-wizard',
   templateUrl: './booking-wizard.component.html',
-  // Optional: Use OnPush for potential performance gains if state changes are always handled via BookingService
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./booking-wizard.component.css'], // Updated CSS reference
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingWizardComponent implements OnInit, OnDestroy {
   currentStep = 1;
   readonly totalSteps = 6;
   currentBookingData: BookingData | null = null;
-
+  message: { text: string | null; type: 'success' | 'error' | null } = { text: null, type: null };
   private bookingSubscription: Subscription | undefined;
 
   constructor(
     private bookingService: BookingService,
     private messageService: MessageService,
-    private cdr: ChangeDetectorRef // Inject if using OnPush or need manual trigger
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.bookingSubscription = this.bookingService.bookingState$.subscribe(data => {
-        this.currentBookingData = data;
-        // If booking confirmed externally or by state restoration, jump to last step
-        if (data.isConfirmed && this.currentStep !== this.totalSteps) {
-           this.currentStep = this.totalSteps;
-        }
-        this.cdr.markForCheck(); // Trigger change detection if needed
+      this.currentBookingData = data;
+      if (data.isConfirmed && this.currentStep !== this.totalSteps) {
+        this.currentStep = this.totalSteps;
+      }
+      this.cdr.markForCheck();
     });
   }
 
@@ -51,25 +37,28 @@ export class BookingWizardComponent implements OnInit, OnDestroy {
     this.bookingSubscription?.unsubscribe();
   }
 
-  // HostListener to scroll to top on step change might be better handled
-  // within nextStep/prevStep if needed, or via a directive.
-  // @HostListener('window:scroll')
-  // onWindowScroll() { /* Can check if step changed and scroll */ }
-
   nextStep(): void {
-    if (this.validateCurrentStep()) {
+    if (this.validateStep(this.currentStep)) {
       if (this.currentStep < this.totalSteps) {
-        this.currentStep++;
-        if (this.currentStep === this.totalSteps) {
-            // Final step logic (confirmation)
-            this.bookingService.confirmBooking(); // Mark as confirmed, trigger side effects (API etc)
+        if (this.currentStep === this.totalSteps - 1) {
+          this.bookingService.confirmBooking().subscribe({
+            next: () => {
+              this.currentStep++;
+              this.messageService.showMessage('Booking confirmed successfully!', 'success');
+              this.scrollToTop();
+              this.cdr.markForCheck();
+            },
+            error: (errors: string[]) => {
+              const errorMessage = Array.isArray(errors) ? errors.join(', ') : 'Failed to confirm booking';
+              this.messageService.showMessage(errorMessage, 'error');
+            }
+          });
+        } else {
+          this.currentStep++;
+          this.scrollToTop();
+          this.cdr.markForCheck();
         }
-        this.scrollToTop();
-        this.cdr.markForCheck();
       }
-    } else {
-        // Validation messages should be handled within step components or shown via messageService
-        console.error(`Validation failed for step ${this.currentStep}`);
     }
   }
 
@@ -81,58 +70,52 @@ export class BookingWizardComponent implements OnInit, OnDestroy {
     }
   }
 
-  validateCurrentStep(): boolean {
-      if (!this.currentBookingData) return false;
-
-      switch (this.currentStep) {
-          case 1: // Service
-              if (!this.currentBookingData.service) {
-                  this.messageService.showMessage('Please select a service.', 'error');
-                  return false;
-              }
-              break;
-          case 2: // Time
-              if (!this.currentBookingData.time) {
-                  this.messageService.showMessage('Please select an appointment time.', 'error');
-                  return false;
-              }
-              break;
-          case 3: // Seat (Assuming required for now)
-              if (!this.currentBookingData.seat) {
-                  this.messageService.showMessage('Please select a seat.', 'error');
-                  return false;
-              }
-              break;
-          case 4: // Details (Validation handled within StepDetailsComponent via form validity)
-              // We assume the button is disabled if form is invalid, but add a check just in case.
-               if (!this.currentBookingData.userInfo.name || !this.currentBookingData.userInfo.phone || !this.currentBookingData.userInfo.email) {
-                   this.messageService.showMessage('Please fill in all your details correctly.', 'error');
-                   return false; // Should be caught by form validation mostly
-               }
-              break;
-           case 5: // Payment (Validation handled within StepPaymentComponent)
-                // Similar to details, button should be disabled. Double check key fields.
-                if (!this.currentBookingData.paymentDetails.method) {
-                    this.messageService.showMessage('Payment details seem incomplete.', 'error');
-                    return false;
-                }
-                // Specific validation depends on method, handled in child component
-                break;
-          // Step 6 is confirmation, no validation needed to proceed *to* it here
+  validateStep(step: number): boolean {
+    const validationMessages: Record<number, { condition: boolean; message: string }> = {
+      1: { condition: !this.currentBookingData?.service, message: 'Please select a service' },
+      2: { condition: !this.currentBookingData?.time, message: 'Please select an appointment time' },
+      3: { condition: !this.currentBookingData?.seat, message: 'Please select a seat' },
+      4: {
+        condition: !this.currentBookingData?.userInfo.name ||
+          !this.currentBookingData?.userInfo.phone ||
+          !this.currentBookingData?.userInfo.email,
+        message: 'Please fill in all your details correctly'
+      },
+      5: {
+        condition: !this.currentBookingData?.paymentDetails.method ||
+          this.currentBookingData?.paymentDetails.amount <= 0,
+        message: 'Please complete payment details'
       }
-      return true; // Passed validation or not applicable
+    };
+
+    const stepValidation = validationMessages[step];
+    if (stepValidation && stepValidation.condition) {
+      this.messageService.showMessage(stepValidation.message, 'error');
+      return false;
+    }
+    return true;
   }
 
-
   startNewBooking(): void {
-    this.bookingService.resetBooking();
-    this.currentStep = 1;
-    this.messageService.showMessage('Ready for a new booking!', 'success');
-    this.scrollToTop();
-    this.cdr.markForCheck();
+    if (this.currentBookingData?.isConfirmed) {
+      this.bookingService.resetBooking();
+      this.currentStep = 1;
+      this.messageService.showMessage('Ready for a new booking!', 'success');
+      this.scrollToTop();
+      this.cdr.markForCheck();
+    } else {
+      const confirmReset = window.confirm('Are you sure you want to start a new booking? All current progress will be lost.');
+      if (confirmReset) {
+        this.bookingService.resetBooking();
+        this.currentStep = 1;
+        this.messageService.showMessage('Starting a new booking', 'success');
+        this.scrollToTop();
+        this.cdr.markForCheck();
+      }
+    }
   }
 
   private scrollToTop(): void {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

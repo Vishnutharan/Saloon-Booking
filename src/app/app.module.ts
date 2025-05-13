@@ -8,7 +8,7 @@ import { RegisterComponent } from './component/register/register.component';
 import { HomeComponent } from './component/home/home.component';
 import { AuthService } from './Services/AuthService';
 import { AuthGuard } from './Guard/AuthGuard';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './Interceptor/AuthInterceptor';
 import { ProgressBarComponent } from './component/progress-bar/progress-bar.component';
@@ -20,6 +20,7 @@ import { StepPaymentComponent } from './component/step-payment/step-payment.comp
 import { StepConfirmationComponent } from './component/step-confirmation/step-confirmation.component';
 import { BookingWizardComponent } from './component/booking-wizard/booking-wizard.component';
 import { MessageBoxComponent } from './component/message-box/message-box.component';
+import { SaloonHomeComponent } from './component/saloon-home/saloon-home.component';
 
 @NgModule({
   declarations: [
@@ -35,12 +36,14 @@ import { MessageBoxComponent } from './component/message-box/message-box.compone
     StepDetailsComponent,
     StepPaymentComponent,
     StepConfirmationComponent,
-    BookingWizardComponent
+    BookingWizardComponent,
+    SaloonHomeComponent
   ],
   imports: [
    BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [AuthService, AuthGuard,

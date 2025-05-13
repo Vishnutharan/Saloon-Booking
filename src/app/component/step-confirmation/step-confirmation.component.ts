@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { BookingService } from '../../services/booking.service';
+import { BookingService } from '../../Services/booking.service';
 import { BookingData } from '../../models/booking.model';
 
 @Component({

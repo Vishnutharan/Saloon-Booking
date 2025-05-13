@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { BookingService } from '../../services/booking.service';
+import { BookingService } from '../../Services/booking.service';
 import { BookingData, PaymentDetails } from '../../models/booking.model';
-import { MessageService } from 'src/app/services/message.service';
+import { MessageService } from 'src/app/Services/message.service';
 
 @Component({
   selector: 'app-step-payment',

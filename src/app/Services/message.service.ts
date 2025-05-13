@@ -17,6 +17,14 @@ export class MessageService {
     this.messageSubject.next({ text, type });
   }
 
+  showError(text: string): void {
+    this.showMessage(text, 'error');
+  }
+
+  showSuccess(text: string): void {
+    this.showMessage(text, 'success');
+  }
+
   clearMessage(): void {
     this.messageSubject.next(null);
   }

@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Observable, Subscription } from 'rxjs';
 import { Service } from '../../models/service.model';
 import { BookingData } from '../../models/booking.model';
-import { DataService } from '../../services/data.service';
-import { BookingService } from '../../services/booking.service';
+import { BookingService } from '../../Services/booking.service';
+import { DataService } from 'src/app/Services/data.service';
 
 @Component({
   selector: 'app-step-service',

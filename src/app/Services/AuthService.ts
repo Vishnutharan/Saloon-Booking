@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { environment } from '../Environment/environment';
 
 export interface User {
   userId: number;
@@ -26,8 +27,9 @@ export interface RegisterRequest {
 })
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User | null>;
-  private apiUrl = 'https://localhost:7281/api/Auth'; // Update with your backend URL
+  private apiUrl: string;
   constructor(private http: HttpClient) {
+    this.apiUrl = `${environment.apiUrl}${environment.endpoints.auth}`;
     const storedUser = localStorage.getItem('currentUser');
     this.currentUserSubject = new BehaviorSubject<User | null>(
       storedUser ? JSON.parse(storedUser) : null
@@ -40,26 +42,44 @@ export class AuthService {
 
   login(credentials: LoginRequest): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/login`, credentials)
-      .pipe(map(user => {
-        // login successful if there's a jwt token in the response
-        if (user && user.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-        }
-        return user;
-      }));
+      .pipe(
+        map(user => {
+          if (user?.token) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+            return user;
+          }
+          throw new Error('Invalid response from server');
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.error('Login error:', error);
+          if (error.status === 401) {
+            return throwError(() => 'Invalid email or password');
+          }
+          return throwError(() => error.error?.message || 'An error occurred during login');
+        })
+      );
   }
 
   register(registerData: RegisterRequest): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/register`, registerData)
-      .pipe(map(user => {
-        if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-        }
-        return user;
-      }));
+      .pipe(
+        map(user => {
+          if (user?.token) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+            return user;
+          }
+          throw new Error('Invalid response from server');
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.error('Registration error:', error);
+          if (error.status === 409) {
+            return throwError(() => 'Email already exists');
+          }
+          return throwError(() => error.error?.message || 'An error occurred during registration');
+        })
+      );
   }
 
   loginWithGoogle() {
@@ -85,7 +105,7 @@ export class AuthService {
   private decodeToken(token: string): User | null {
     try {
       const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace('-', '+').replace('_', '/');
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
       const payload = JSON.parse(window.atob(base64));
       
       return {

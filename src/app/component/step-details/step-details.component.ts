@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { BookingService } from '../../services/booking.service';
+import { BookingService } from '../../Services/booking.service';
 import { UserInfo } from '../../models/booking.model';
 
 @Component({

@@ -9,6 +9,7 @@ import { AuthService } from './Services/AuthService';
 })
 export class AppComponent {
   title = 'saloon-booking-ng';
+  showBookingWizard = false;
 
   constructor(
     private authService: AuthService,
@@ -22,5 +23,9 @@ export class AppComponent {
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  toggleBookingWizard() {
+    this.showBookingWizard = !this.showBookingWizard;
   }
 }

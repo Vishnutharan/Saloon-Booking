@@ -1,0 +1,239 @@
+<header class="navbar" [class.scrolled]="isScrolled" @fadeIn>
+  <div class="container">
+    <a (click)="scrollToSection('hero')" class="navbar-brand">GlamourGrove</a>
+    <button class="navbar-toggler" (click)="toggleMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav class="navbar-nav" [class.active]="isMobileMenuOpen">
+      <a (click)="scrollToSection('hero')" class="nav-link">Home</a>
+      <a (click)="scrollToSection('about')" class="nav-link">About</a>
+      <a (click)="scrollToSection('services')" class="nav-link">Services</a>
+      <a (click)="scrollToSection('gallery')" class="nav-link">Gallery</a>
+      <a (click)="scrollToSection('reviews')" class="nav-link">Reviews</a>
+      <a (click)="scrollToSection('contact')" class="nav-link">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section id="hero" class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content" @fadeInUp>
+    <h1 class="hero-title">Experience Beauty Redefined</h1>
+    <p class="hero-subtitle">Your ultimate destination for luxury salon and spa services.</p>
+    <button (click)="scrollToSection('services')" class="btn btn-primary hero-cta">Explore Our Services</button>
+  </div>
+  <a (click)="scrollToSection('about')" class="scroll-down-indicator">
+    <i class="fas fa-chevron-down"></i>
+  </a>
+</section>
+
+<section id="about" class="about-section section-padding">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 about-image-container" @slideInRight>
+        <img src="assets/images/about-us.jpg" alt="About GlamourGrove Saloon" class="img-fluid rounded shadow-lg">
+      </div>
+      <div class="col-lg-6 about-content" @fadeInUp>
+        <h2 class="section-title">Welcome to <span class="highlight">GlamourGrove</span></h2>
+        <p class="lead-text">
+          At GlamourGrove, we believe that beauty is an art, and self-care is a journey. Our mission is to provide you with an unparalleled salon experience, combining expertise, luxury, and a warm, welcoming atmosphere.
+        </p>
+        <p>
+          Founded in 2010, GlamourGrove has grown to be a sanctuary for those seeking a touch of elegance and rejuvenation. Our team of highly skilled and passionate stylists, therapists, and artists are dedicated to making you look and feel your absolute best. We stay ahead of the latest trends and techniques, ensuring you receive modern, personalized services.
+        </p>
+        <ul class="about-features">
+          <li><i class="fas fa-check-circle"></i> Expert Stylists & Therapists</li>
+          <li><i class="fas fa-check-circle"></i> Premium Quality Products</li>
+          <li><i class="fas fa-check-circle"></i> Luxurious & Relaxing Ambiance</li>
+          <li><i class="fas fa-check-circle"></i> Personalized Consultations</li>
+        </ul>
+        <button (click)="scrollToSection('contact')" class="btn btn-secondary">Book an Appointment</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services-section section-padding bg-light">
+  <div class="container">
+    <h2 class="section-title text-center" @fadeInUp>Our <span class="highlight">Services</span></h2>
+    <p class="section-subtitle text-center" @fadeInUp>Indulge in a wide range of treatments designed to enhance your natural beauty.</p>
+    <div class="row" @staggerIn>
+      <div class="col-md-6 col-lg-4 mb-4" *ngFor="let service of services">
+        <div class="service-card">
+          <div class="service-icon">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3 class="service-name">{{ service.name }}</h3>
+          <p class="service-description">{{ service.description }}</p>
+          <p class="service-price">{{ service.price }}</p>
+          <a (click)="scrollToSection('contact')" class="btn btn-outline-primary service-cta">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why-choose-us" class="why-choose-us-section section-padding">
+  <div class="container">
+    <h2 class="section-title text-center" @fadeInUp>Why <span class="highlight">Choose Us?</span></h2>
+    <div class="row mt-5" @staggerIn>
+      <div class="col-md-4 mb-4">
+        <div class="feature-box">
+          <div class="feature-icon"><i class="fas fa-award"></i></div>
+          <h4 class="feature-title">Expert Professionals</h4>
+          <p>Our team comprises certified and experienced professionals dedicated to excellence.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="feature-box">
+          <div class="feature-icon"><i class="fas fa-gem"></i></div>
+          <h4 class="feature-title">Premium Products</h4>
+          <p>We use only high-quality, industry-leading products for all our treatments.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="feature-box">
+          <div class="feature-icon"><i class="fas fa-heart"></i></div>
+          <h4 class="feature-title">Client Focused</h4>
+          <p>Your satisfaction is our priority. We tailor services to meet your unique needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="gallery-section section-padding bg-light">
+  <div class="container">
+    <h2 class="section-title text-center" @fadeInUp>Our <span class="highlight">Gallery</span></h2>
+    <p class="section-subtitle text-center" @fadeInUp>A glimpse into the transformations and artistry at GlamourGrove.</p>
+    <div class="gallery-filters text-center mb-4" @fadeInUp>
+      <button class="btn filter-btn" [class.active]="activeGalleryFilter === 'all'" (click)="filterGallery('all')">All</button>
+      <button class="btn filter-btn" [class.active]="activeGalleryFilter === 'hair'" (click)="filterGallery('hair')">Hair</button>
+      <button class="btn filter-btn" [class.active]="activeGalleryFilter === 'makeup'" (click)="filterGallery('makeup')">Makeup</button>
+      <button class="btn filter-btn" [class.active]="activeGalleryFilter === 'nails'" (click)="filterGallery('nails')">Nails</button>
+      <button class="btn filter-btn" [class.active]="activeGalleryFilter === 'spa'" (click)="filterGallery('spa')">Spa</button>
+    </div>
+    <div class="row gallery-grid" @staggerIn>
+      <div class="col-md-6 col-lg-4 mb-4 gallery-item" *ngFor="let image of filteredGalleryImages">
+        <div class="gallery-image-wrapper">
+          <img [src]="image.src" [alt]="image.alt" class="img-fluid rounded">
+          <div class="gallery-image-overlay">
+            <p>{{ image.alt }}</p>
+          </div>
+        </div>
+      </div>
+       <p *ngIf="filteredGalleryImages.length === 0" class="text-center w-100">No images found for this category.</p>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="reviews-section section-padding">
+  <div class="container">
+    <h2 class="section-title text-center" @fadeInUp>Client <span class="highlight">Testimonials</span></h2>
+    <p class="section-subtitle text-center" @fadeInUp>Hear what our happy clients have to say about their GlamourGrove experience.</p>
+    <div class="row mt-5" @staggerIn>
+      <div class="col-md-6 col-lg-4 mb-4" *ngFor="let review of reviews">
+        <div class="review-card">
+          <div class="review-header">
+            <img *ngIf="review.imageSrc" [src]="review.imageSrc" alt="{{review.name}}" class="review-client-image">
+            <div *ngIf="!review.imageSrc" class="review-client-initials">{{ review.name.charAt(0) }}</div>
+            <div class="review-client-info">
+              <h5 class="review-client-name">{{ review.name }}</h5>
+              <div class="review-stars">
+                <i class="fas fa-star" *ngFor="let i of getStarArray(review.stars)"></i>
+                <i class="far fa-star" *ngFor="let i of getEmptyStarArray(review.stars)"></i>
+              </div>
+            </div>
+          </div>
+          <p class="review-comment">"{{ review.comment }}"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner section-padding text-center text-white" @fadeIn>
+  <div class="container">
+    <h2 class="cta-title">Ready for Your Transformation?</h2>
+    <p class="cta-text">Book your appointment today and let us pamper you. Experience the GlamourGrove difference!</p>
+    <button (click)="scrollToSection('contact')" class="btn btn-light btn-lg cta-button">Book Appointment</button>
+  </div>
+</section>
+
+<section id="contact" class="contact-section section-padding bg-light">
+  <div class="container">
+    <h2 class="section-title text-center" @fadeInUp>Get In <span class="highlight">Touch</span></h2>
+    <p class="section-subtitle text-center" @fadeInUp>We're here to answer any questions you may have. Reach out to us!</p>
+    <div class="row mt-5">
+      <div class="col-lg-6 contact-info" @slideInRight>
+        <h4>Contact Details</h4>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Glamour Street, Beauty City, BC 12345</p>
+        <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+        <p><i class="fas fa-envelope"></i> infoglamourgrove.com</p>
+        <h4>Opening Hours</h4>
+        <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
+        <p>Saturday: 10:00 AM - 6:00 PM</p>
+        <p>Sunday: Closed</p>
+        <div class="social-icons mt-3">
+          <a href="#" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" target="_blank" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-6 contact-form-container" @fadeInUp>
+        <h4>Send Us a Message</h4>
+        <form #contactForm="ngForm" (ngSubmit)="submitContactForm($event, contactForm)">
+          <div class="form-group mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" ngModel required #nameField="ngModel"
+                   [ngClass]="{'is-invalid': nameField.invalid && (nameField.dirty || nameField.touched)}">
+            <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="invalid-feedback">
+              Name is required.
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Your Email" ngModel required email #emailField="ngModel"
+                   [ngClass]="{'is-invalid': emailField.invalid && (emailField.dirty || emailField.touched)}">
+            <div *ngIf="emailField.invalid && (emailField.dirty || emailField.touched)" class="invalid-feedback">
+              <span *ngIf="emailField.errors?.['required']">Email is required.</span>
+              <span *ngIf="emailField.errors?.['email']">Please enter a valid email.</span>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="subject" class="form-label">Subject</label>
+            <input type="text" id="subject" name="subject" class="form-control" placeholder="Subject" ngModel>
+          </div>
+          <div class="form-group mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" name="message" rows="5" class="form-control" placeholder="Your Message" ngModel required #messageField="ngModel"
+                      [ngClass]="{'is-invalid': messageField.invalid && (messageField.dirty || messageField.touched)}"></textarea>
+            <div *ngIf="messageField.invalid && (messageField.dirty || messageField.touched)" class="invalid-feedback">
+              Message is required.
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary w-100" [disabled]="contactForm.invalid">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-section text-center text-white">
+  <div class="container">
+    <p>&copy; {{ currentYear }} GlamourGrove Saloon. All Rights Reserved.</p>
+    <p>Designed with <i class="fas fa-heart" style="color: #ff7b54;"></i> by Your Name/Company</p>
+    <div class="footer-links">
+      <a (click)="scrollToSection('hero')">Home</a> |
+      <a (click)="scrollToSection('about')">About</a> |
+      <a (click)="scrollToSection('services')">Services</a> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<button *ngIf="isScrolled" (click)="scrollToSection('hero')" class="back-to-top-btn" title="Back to Top">
+  <i class="fas fa-arrow-up"></i>
+</button>

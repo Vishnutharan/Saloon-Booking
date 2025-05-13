@@ -8,14 +8,14 @@ import { BookingWizardComponent } from './component/booking-wizard/booking-wizar
 import { SaloonHomeComponent } from './component/saloon-home/saloon-home.component';
 
 const routes: Routes = [
-  // { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent },
-  { path: 'Shome', component: SaloonHomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'booking', component: BookingWizardComponent, canActivate: [AuthGuard]  },
-  // Redirect to login for any undefined routes
+  { path: 'Shome', component: SaloonHomeComponent },
+  { path: 'bookingwizerd', component: BookingWizardComponent },
+  // { path: '', redirectTo: 'home', pathMatch: 'full' },
   // { path: '**', redirectTo: 'login' }
+  // { path: 'booking', component: BookingWizardComponent, canActivate: [AuthGuard]  },
 ];
 
 @NgModule({

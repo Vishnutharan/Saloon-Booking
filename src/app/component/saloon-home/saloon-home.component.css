@@ -1133,62 +1133,85 @@ img {
 }
 
 /* Newsletter Section */
+
 .newsletter-section {
-  background-color: var(--secondary-color);
+  background: linear-gradient(135deg, #84909c, #9ab0c5); /* Dark gradient for a sleek professional look */
   color: var(--white);
   text-align: center;
+  padding: 50px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adds a soft shadow effect */
 }
+
 .newsletter-section .section-title, .newsletter-section h3 {
-    color: var(--white);
+  color: var(--white);
+  font-family: 'Helvetica Neue', sans-serif; /* Modern, professional font */
+  font-weight: bold;
 }
-.newsletter-section .section-title::after{
-    background-color: var(--white);
+
+.newsletter-section .section-title::after {
+  background-color: var(--white);
 }
 
 .newsletter-content h3 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  font-weight: bold;
 }
 
 .newsletter-content p {
-  font-size: 1.1rem;
-  margin-bottom: 30px;
+  font-size: 1.2rem;
+  margin-bottom: 25px;
   color: var(--light-text-color);
-  opacity: 0.9;
+  opacity: 0.85;
+  line-height: 1.6;
 }
 
 .newsletter-form {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
 }
 
 .newsletter-form input[type="email"] {
   flex-grow: 1;
-  padding: 15px 20px;
+  padding: 18px 25px;
   border: 1px solid var(--white);
   border-radius: 50px 0 0 50px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   outline: none;
+  color: var(--white);
+  background-color: rgba(255, 255, 255, 0.3); /* Subtle background color */
 }
+
 .newsletter-form input[type="email"]::placeholder {
-    color: var(--gray);
+  color: var(--gray);
+  font-style: italic;
 }
 
 .newsletter-form button {
   border-radius: 0 50px 50px 0;
-  padding: 15px 30px;
+  padding: 18px 35px;
   background-color: var(--primary-color);
   color: var(--white);
   border: 1px solid var(--primary-color);
+  font-size: 1.1rem;
+  transition: all 0.3s ease-in-out;
 }
+
 .newsletter-form button:hover {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-    border-color: var(--accent-color);
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  border-color: var(--accent-color);
+  transform: scale(1.05); /* Slight hover effect */
 }
+
+
 
 /* Contact Section */
 
@@ -1886,6 +1909,7 @@ img {
 @media (max-width: 768px) {
   .section-padding {
     padding: 60px 0;
+    border-color: #103e88;
   }
   
   #header .nav-menu {

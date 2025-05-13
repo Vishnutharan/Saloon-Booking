@@ -1,337 +1,604 @@
 <div class="main-container">
-  <!-- Navigation Bar -->
-  <nav class="navbar" [class.navbar-scrolled]="scrolled">
-    <div class="navbar-container">
-      <div class="navbar-logo" (click)="scrollToSection('hero')">
-        <img src="/assets/saloon7.png" alt="Elegance Salon Logo">
-        <span>Elegance</span>
-      </div>
-      <div class="navbar-links" [class.active]="showMobileMenu">
-        <ul>
-          <li><a (click)="scrollToSection('hero')">Home</a></li>
-          <li><a (click)="scrollToSection('about')">About</a></li>
-          <li><a (click)="scrollToSection('services')">Services</a></li>
-          <li><a (click)="scrollToSection('gallery')">Gallery</a></li>
-          <li><a (click)="scrollToSection('team')">Our Team</a></li>
-          <li><a (click)="scrollToSection('testimonials')">Reviews</a></li>
-          <li><a (click)="scrollToSection('contact')">Contact</a></li>
-        </ul>
-      </div>
-      <div class="navbar-book-btn">
-        <button class="btn btn-primary">Book Now</button>
-      </div>
-      <div class="mobile-menu-toggle" (click)="toggleMobileMenu()">
-        <span [class.open]="showMobileMenu"></span>
-        <span [class.open]="showMobileMenu"></span>
-        <span [class.open]="showMobileMenu"></span>
-      </div>
-    </div>
-  </nav>
+    <!-- Navigation Bar -->
+    <nav class="navbar" [class.scrolled]="scrolled">
+        <div class="navbar-container container">
+            <a (click)="scrollToSection('hero')" href="javascript:void(0);" class="navbar-logo">
+                <img src="assets/saloon7.png" alt="Elegance Salon Logo">
+                <span>Elegance</span>
+            </a>
+            <div class="navbar-links" [class.active]="showMobileMenu">
+                <button class="navbar-mobile-close" aria-label="Close menu" (click)="toggleMobileMenu()">×</button>
+                <ul>
+                    <li><a href="#hero" class="nav-link" (click)="scrollToSection('hero'); toggleMobileMenu();">Home</a></li>
+                    <li><a href="#about" class="nav-link" (click)="scrollToSection('about'); toggleMobileMenu();">About</a></li>
+                    <li><a href="#services" class="nav-link" (click)="scrollToSection('services'); toggleMobileMenu();">Services</a></li>
+                    <li><a href="#gallery" class="nav-link" (click)="scrollToSection('gallery'); toggleMobileMenu();">Gallery</a></li>
+                    <li><a href="#team" class="nav-link" (click)="scrollToSection('team'); toggleMobileMenu();">Our Team</a></li>
+                    <li><a href="#testimonials" class="nav-link" (click)="scrollToSection('testimonials'); toggleMobileMenu();">Reviews</a></li>
+                    <li><a href="#contact" class="nav-link" (click)="scrollToSection('contact'); toggleMobileMenu();">Contact</a></li>
+                </ul>
+                <div class="navbar-actions navbar-actions--mobile">
+                    <a href="login.html" class="btn btn--sm btn--outline">Login</a>
+                    <a href="register.html" class="btn btn--sm btn--outline-secondary">Register</a>
+                    <a (click)="openBookingModal(); toggleMobileMenu();" href="javascript:void(0);" class="btn btn--sm btn--primary">Book Now</a>
+                </div>
+            </div>
+            <div class="navbar-actions navbar-actions--desktop">
+                <a href="login.html" class="btn btn--sm btn--outline">Login</a>
+                <a href="register.html" class="btn btn--sm btn--outline-secondary">Register</a>
+                <a (click)="openBookingModal()" href="javascript:void(0);" class="btn btn--primary">Book Now</a>
+            </div>
+            <div class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
-  <!-- Hero Section -->
-  <section id="hero" class="hero-section">
-    <div class="hero-content" @fadeIn>
-      <h1>Beauty & Elegance</h1>
-      <h2>Where Style Meets Confidence</h2>
-      <p>Experience the ultimate in luxury salon services tailored just for you</p>
-      <div class="hero-buttons">
-        <button class="btn btn-primary">Book Appointment</button>
-        <button class="btn btn-secondary">View Services</button>
-      </div>
-    </div>
-  </section>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content container">
+            <h1>Beauty & Elegance</h1>
+            <h2>Where Style Meets Confidence</h2>
+            <p>Experience the ultimate in luxury salon services tailored just for you.</p>
+            <div class="hero-buttons">
+                <a (click)="openBookingModal()" href="javascript:void(0);" class="btn btn--primary btn--lg">Book Appointment</a>
+                <a (click)="scrollToSection('services')" href="javascript:void(0);" class="btn btn--outline-light btn--lg">View Services</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- About Section -->
-  <section id="about" class="about-section">
-    <div class="container">
-      <div class="section-header" @slideIn>
-        <span class="section-title-tag">About Us</span>
-        <h2>Welcome to Elegance Salon</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="about-content">
-        <div class="about-image" @fadeIn>
-          <img src="/assets/saloon4.png" alt="Salon Interior">
+    <!-- About Section -->
+    <section id="about" class="about-section section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-title-tag">About Us</span>
+                <h2>Welcome to Elegance Salon</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="assets/saloon4.png" alt="Salon Interior" class="rounded-image">
+                    <div class="experience-badge">
+                        <span class="years">15</span>
+                        <span class="text">Years of<br>Excellence</span>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>Your Beauty Journey Starts Here</h3>
+                    <p>Founded in 2010, Elegance Salon has been at the forefront of beauty innovation, offering premium services in a relaxing atmosphere. Our team of highly trained professionals is dedicated to helping you look and feel your best.</p>
+                    <p>We believe that beauty is unique to every individual, which is why we tailor our services to meet your specific needs and preferences.</p>
+                    <div class="about-features">
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-award"></i></div>
+                            <div class="feature-text">
+                                <h4>Premium Quality</h4>
+                                <p>We use only top-tier products for all our services.</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-users"></i></div>
+                            <div class="feature-text">
+                                <h4>Expert Team</h4>
+                                <p>Our stylists are certified and continuously trained.</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon"><i class="fas fa-smile"></i></div>
+                            <div class="feature-text">
+                                <h4>100% Satisfaction</h4>
+                                <p>Your happiness is our top priority.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a (click)="scrollToSection('team')" href="javascript:void(0);" class="btn btn--outline">Meet Our Team</a>
+                </div>
+            </div>
         </div>
-        <div class="about-text" @slideIn>
-          <h3>Your Beauty Journey Starts Here</h3>
-          <p>Founded in 2010, Elegance Salon has been at the forefront of beauty innovation, offering premium services in a relaxing atmosphere. Our team of highly trained professionals is dedicated to helping you look and feel your best.</p>
-          <p>We believe that beauty is unique to every individual, which is why we tailor our services to meet your specific needs and preferences.</p>
-          <div class="about-features">
-            <div class="feature">
-              <div class="feature-icon">
-                <i class="fas fa-award"></i>
-              </div>
-              <div class="feature-text">
-                <h4>Premium Quality</h4>
-                <p>We use only top-tier products for all our services</p>
-              </div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">
-                <i class="fas fa-users"></i>
-              </div>
-              <div class="feature-text">
-                <h4>Expert Team</h4>
-                <p>Our stylists are certified and continuously trained</p>
-              </div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">
-                <i class="fas fa-smile"></i>
-              </div>
-              <div class="feature-text">
-                <h4>100% Satisfaction</h4>
-                <p>Your happiness is our top priority</p>
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-outline">Learn More</button>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Services Section -->
-  <section id="services" class="services-section">
-    <div class="container">
-      <div class="section-header" @slideIn>
-        <span class="section-title-tag">Our Services</span>
-        <h2>Premium Beauty Services</h2>
-        <div class="section-divider"></div>
-        <p class="section-subtitle">Discover our range of professional beauty services designed to enhance your natural beauty</p>
-      </div>
-      <div class="services-grid">
-        <div class="service-card" *ngFor="let service of services" @fadeIn>
-          <div class="service-image">
-            <img [src]="service.image" [alt]="service.name">
-            <div class="service-price">{{service.price}}</div>
-          </div>
-          <div class="service-content">
-            <h3>{{service.name}}</h3>
-            <p>{{service.description}}</p>
-            <button class="btn btn-outline">Book Now</button>
-          </div>
+    <!-- Services Section -->
+    <section id="services" class="services-section section-padding section-padding--alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-title-tag">Our Services</span>
+                <h2>Premium Beauty Services</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Discover our range of professional beauty services designed to enhance your natural beauty.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" *ngFor="let service of services; let i = index">
+                    <div class="service-image">
+                        <img [src]="service.image" [alt]="service.name">
+                        <div class="service-price">{{ service.price }}</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>{{ service.name }}</h3>
+                        <p>{{ service.description }}</p>
+                        <div class="service-features">
+                            <span *ngFor="let feature of service.features">{{ feature }}</span>
+                        </div>
+                        <a (click)="openBookingModal(service.name)" href="javascript:void(0);" class="btn btn--primary btn--block">Book Now</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Gallery Section -->
-  <section id="gallery" class="gallery-section">
-    <div class="container">
-      <div class="section-header" @slideIn>
-        <span class="section-title-tag">Our Gallery</span>
-        <h2>Stunning Transformations</h2>
-        <div class="section-divider"></div>
-        <p class="section-subtitle">Take a look at some of our favorite work and beautiful salon spaces</p>
-      </div>
-      <div class="gallery-grid">
-        <div class="gallery-item" *ngFor="let image of galleryImages" @fadeIn>
-          <img [src]="image.src" [alt]="image.alt">
-          <div class="gallery-overlay">
-            <div class="gallery-overlay-content">
-              <h4>{{image.alt}}</h4>
-              <span class="zoom-icon">+</span>
+    <!-- Stats Section -->
+    <section class="stats-section section-padding">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-users-line"></i></div>
+                    <div class="stat-number">5000</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Expert Stylists</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                    <div class="stat-number">30</div>
+                    <div class="stat-label">Beauty Services</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-award"></i></div>
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Team Section -->
-  <section id="team" class="team-section">
-    <div class="container">
-      <div class="section-header" @slideIn>
-        <span class="section-title-tag">Meet Our Team</span>
-        <h2>Expert Stylists</h2>
-        <div class="section-divider"></div>
-        <p class="section-subtitle">Our talented team of professionals is dedicated to making you look and feel amazing</p>
-      </div>
-      <div class="team-grid">
-        <div class="team-member" *ngFor="let member of team" @fadeIn>
-          <div class="team-member-image">
-            <img [src]="member.image" [alt]="member.name">
-            <div class="team-social">
-              <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section section-padding section-padding--alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-title-tag">Our Gallery</span>
+                <h2>Stunning Transformations</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Take a look at some of our favorite work and beautiful salon spaces.</p>
             </div>
-          </div>
-          <div class="team-member-info">
-            <h3>{{member.name}}</h3>
-            <span class="team-position">{{member.position}}</span>
-            <p>{{member.bio}}</p>
-          </div>
+            <div class="gallery-filter">
+                <button class="filter-btn" [class.active]="activeFilter === 'all'" (click)="filterGallery('all')">All</button>
+                <button class="filter-btn" [class.active]="activeFilter === 'Styling'" (click)="filterGallery('Styling')">Haircuts</button>
+                <button class="filter-btn" [class.active]="activeFilter === 'Color'" (click)="filterGallery('Color')">Coloring</button>
+                <button class="filter-btn" [class.active]="activeFilter === 'Interior'" (click)="filterGallery('Interior')">Styling</button>
+                <button class="filter-btn" [class.active]="activeFilter === 'Facial'" (click)="filterGallery('Facial')">Spa & Beauty</button>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" *ngFor="let item of filteredGalleryImages; let i = index" [attr.data-category]="item.category">
+                    <img [src]="item.src" [alt]="item.alt">
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-content">
+                            <h4>{{ item.alt }}</h4>
+                            <span class="zoom-icon"><i class="fas fa-search-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="testimonials-section">
-    <div class="container">
-      <div class="section-header" @slideIn>
-        <span class="section-title-tag">Testimonials</span>
-        <h2>What Our Clients Say</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="testimonials-slider">
-        <div class="testimonial-slide" *ngFor="let testimonial of testimonials; let i = index" 
-             [class.active]="i === activeTestimonialIndex" @fadeIn>
-          <div class="testimonial-content">
-            <div class="testimonial-image">
-              <img [src]="testimonial.image" [alt]="testimonial.name">
+    <!-- Team Section -->
+    <section id="team" class="team-section section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-title-tag">Meet Our Team</span>
+                <h2>Expert Stylists</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Our talented team of professionals is dedicated to making you look and feel amazing.</p>
             </div>
-            <div class="testimonial-text">
-              <div class="testimonial-rating">
-                <span class="star" *ngFor="let star of getStarArray(testimonial.rating)">★</span>
-              </div>
-              <p>{{testimonial.comment}}</p>
-              <h4>{{testimonial.name}}</h4>
+            <div class="team-grid">
+                <div class="team-member" *ngFor="let member of team; let i = index">
+                    <div class="team-member-image">
+                        <img [src]="member.image" [alt]="member.name">
+                        <div class="team-social">
+                            <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-member-info">
+                        <h3>{{ member.name }}</h3>
+                        <span class="team-position">{{ member.position }}</span>
+                        <div class="team-specialties">
+                            <span *ngFor="let specialty of member.specialties">{{ specialty }}</span>
+                        </div>
+                        <a (click)="openBookingModal(undefined, member.name)" href="javascript:void(0);" class="btn btn--outline btn--sm">Book Session</a>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="testimonial-dots">
-          <span *ngFor="let testimonial of testimonials; let i = index" 
-                [class.active]="i === activeTestimonialIndex"
-                (click)="activeTestimonialIndex = i"></span>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="contact-section">
-    <div class="container">
-      <div class="section-header" @slideIn>
-        <span class="section-title-tag">Get In Touch</span>
-        <h2>Contact Us</h2>
-        <div class="section-divider"></div>
-        <p class="section-subtitle">Have questions or ready to book an appointment? Reach out to us!</p>
-      </div>
-      <div class="contact-content">
-        <div class="contact-info" @fadeIn>
-          <div class="contact-card">
-            <div class="contact-icon">
-              <i class="fas fa-map-marker-alt"></i>
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing-section section-padding section-padding--alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-title-tag">Our Pricing</span>
+                <h2>Service Packages</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Choose from our carefully crafted packages for the ultimate salon experience.</p>
             </div>
-            <div class="contact-details">
-              <h4>Our Location</h4>
-              <p>123 Beauty Lane, Suite 100<br>New York, NY 10001</p>
+            <div class="pricing-tabs">
+                <button class="pricing-tab" [class.active]="activePricingTab === 'hair'" (click)="setActivePricingTab('hair')">Hair Services</button>
+                <button class="pricing-tab" [class.active]="activePricingTab === 'spa'" (click)="setActivePricingTab('spa')">Spa & Beauty</button>
+                <button class="pricing-tab" [class.active]="activePricingTab === 'nails'" (click)="setActivePricingTab('nails')">Nail Care</button>
             </div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-icon">
-              <i class="fas fa-phone-alt"></i>
+            <div class="pricing-content" id="hair-content" *ngIf="activePricingTab === 'hair'">
+                <div class="pricing-grid">
+                    <div class="pricing-item" *ngFor="let item of hairPricing">
+                        <div class="pricing-header">
+                            <h3>{{ item.service }}</h3>
+                            <span class="pricing-price">{{ item.price }}</span>
+                        </div>
+                        <div class="pricing-body">
+                            <p>{{ item.description }}</p>
+                            <ul class="pricing-features">
+                                <li *ngFor="let feature of item.features"><i class="fas fa-check"></i> {{ feature }}</li>
+                            </ul>
+                            <a (click)="openBookingModal(item.service)" href="javascript:void(0);" class="btn btn--primary btn--block">Book Now</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="contact-details">
-              <h4>Call Us</h4>
-              <p>(123) 456-7890<br>(987) 654-3210</p>
+            <div class="pricing-content" id="spa-content" *ngIf="activePricingTab === 'spa'">
+                <div class="pricing-grid">
+                    <div class="pricing-item" *ngFor="let item of spaPricing">
+                        <div class="pricing-header">
+                            <h3>{{ item.service }}</h3>
+                            <span class="pricing-price">{{ item.price }}</span>
+                        </div>
+                        <div class="pricing-body">
+                            <p>{{ item.description }}</p>
+                            <ul class="pricing-features">
+                                <li *ngFor="let feature of item.features"><i class="fas fa-check"></i> {{ feature }}</li>
+                            </ul>
+                            <a (click)="openBookingModal(item.service)" href="javascript:void(0);" class="btn btn--primary btn--block">Book Now</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-icon">
-              <i class="fas fa-envelope"></i>
+            <div class="pricing-content" id="nails-content" *ngIf="activePricingTab === 'nails'">
+                <div class="pricing-grid">
+                    <div class="pricing-item" *ngFor="let item of nailPricing">
+                        <div class="pricing-header">
+                            <h3>{{ item.service }}</h3>
+                            <span class="pricing-price">{{ item.price }}</span>
+                        </div>
+                        <div class="pricing-body">
+                            <p>{{ item.description }}</p>
+                            <ul class="pricing-features">
+                                <li *ngFor="let feature of item.features"><i class="fas fa-check"></i> {{ feature }}</li>
+                            </ul>
+                            <a (click)="openBookingModal(item.service)" href="javascript:void(0);" class="btn btn--primary btn--block">Book Now</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="contact-details">
-              <h4>Email Us</h4>
-              <p>info&#64;elegancesalon.com<br>appointments&#64;elegancesalon.com</p>
-            </div>
-          </div>
-          <div class="contact-card">
-            <div class="contact-icon">
-              <i class="fas fa-clock"></i>
-            </div>
-            <div class="contact-details">
-              <h4>Opening Hours</h4>
-              <p>Mon-Fri: 9:00 AM - 8:00 PM<br>Sat-Sun: 10:00 AM - 6:00 PM</p>
-            </div>
-          </div>
         </div>
-        <div class="contact-form" @slideIn>
-          <form (ngSubmit)="submitForm()">
-            <div class="form-group">
-              <input type="text" placeholder="Your Name" [(ngModel)]="formData.name" name="name" required>
-            </div>
-            <div class="form-group">
-              <input type="email" placeholder="Your Email" [(ngModel)]="formData.email" name="email" required>
-            </div>
-            <div class="form-group">
-              <input type="tel" placeholder="Your Phone" [(ngModel)]="formData.phone" name="phone" required>
-            </div>
-            <div class="form-group">
-              <select [(ngModel)]="formData.service" name="service" required>
-                <option value="" disabled selected>Select Service</option>
-                <option *ngFor="let service of services" [value]="service.name">{{service.name}}</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <textarea placeholder="Your Message" [(ngModel)]="formData.message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Map Section -->
-  <section class="map-section">
-    <div class="map-container">
-      <!-- Replace with your actual map implementation -->
-      <img src="/assets/saloon7.png" alt="Salon Location Map" class="map-placeholder">
-    </div>
-  </section>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-title-tag">Testimonials</span>
+                <h2>What Our Clients Say</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="testimonials-slider" *ngIf="testimonials.length > 0">
+                <div class="testimonial-slide-wrapper">
+                    <div class="testimonial-slide" *ngFor="let testimonial of testimonials; let i = index" [class.active]="i === activeTestimonialIndex">
+                        <div class="testimonial-content">
+                            <i class="fas fa-quote-left testimonial-quote-icon"></i>
+                            <div class="testimonial-rating">
+                                <span class="star" *ngFor="let star of getStarArray(testimonial.rating)">★</span>
+                                <span class="star" *ngFor="let star of getStarArray(5 - testimonial.rating)">☆</span>
+                            </div>
+                            <p>"{{ testimonial.comment }}"</p>
+                            <div class="testimonial-author">
+                                <img [src]="testimonial.image" [alt]="testimonial.name">
+                                <div class="testimonial-info">
+                                    <h4>{{ testimonial.name }}</h4>
+                                    <span>{{ testimonial.service }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <button class="testimonial-arrow prev" aria-label="Previous testimonial" (click)="prevTestimonial()"><i class="fas fa-chevron-left"></i></button>
+                    <div class="testimonial-dots">
+                        <span class="dot" *ngFor="let testimonial of testimonials; let i = index" [class.active]="i === activeTestimonialIndex" (click)="activeTestimonialIndex = i"></span>
+                    </div>
+                    <button class="testimonial-arrow next" aria-label="Next testimonial" (click)="nextTestimonial()"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-logo">
-          <img src="/assets/saloon1.png" alt="Elegance Salon Logo">
-          <h3>Elegance Salon</h3>
-          <p>Where style meets confidence</p>
+    <!-- Blog Preview Section -->
+    <section id="blog" class="blog-section section-padding section-padding--alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-title-tag">Our Blog</span>
+                <h2>Beauty Tips & Insights</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Stay updated with the latest trends, tips, and beauty advice.</p>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card" *ngFor="let post of blogPosts; let i = index">
+                    <a [href]="'blog-post' + (i+1) + '.html'" class="blog-card-link-wrapper">
+                        <div class="blog-image">
+                            <img [src]="post.image" [alt]="post.title">
+                            <div class="blog-category">{{ post.category }}</div>
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar-alt"></i> {{ post.date }}</span>
+                                <span><i class="far fa-user"></i> By {{ post.author }}</span>
+                            </div>
+                            <h3>{{ post.title }}</h3>
+                            <p>{{ post.excerpt }}</p>
+                            <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="blog-cta">
+                <a href="blog.html" class="btn btn--outline">View All Posts</a>
+            </div>
         </div>
-        <div class="footer-links">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a (click)="scrollToSection('hero')">Home</a></li>
-            <li><a (click)="scrollToSection('about')">About</a></li>
-            <li><a (click)="scrollToSection('services')">Services</a></li>
-            <li><a (click)="scrollToSection('gallery')">Gallery</a></li>
-            <li><a (click)="scrollToSection('contact')">Contact</a></li>
-          </ul>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section section-padding">
+        <div class="container newsletter-container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <i class="far fa-envelope-open newsletter-icon"></i>
+                    <h3>Subscribe to Our Newsletter</h3>
+                    <p>Stay updated with our latest offers, beauty tips, and exclusive deals.</p>
+                </div>
+                <form class="newsletter-form" (ngSubmit)="submitNewsletter()" #newsletterForm="ngForm">
+                    <input type="email" name="email" placeholder="Your Email Address" class="newsletter-input" aria-label="Email Address" [(ngModel)]="newsletterEmail" required #emailNewsletter="ngModel">
+                    <button type="submit" class="btn btn--primary" [disabled]="newsletterForm.invalid">Subscribe</button>
+                </form>
+                <div *ngIf="emailNewsletter.invalid && (emailNewsletter.dirty || emailNewsletter.touched)" class="form-error">
+                    <small *ngIf="emailNewsletter.errors?.['required']">Email is required.</small>
+                    <small *ngIf="emailNewsletter.errors?.['email']">Please enter a valid email.</small>
+                </div>
+            </div>
         </div>
-        <div class="footer-services">
-          <h4>Our Services</h4>
-          <ul>
-            <li><a href="#">Haircut & Styling</a></li>
-            <li><a href="#">Hair Coloring</a></li>
-            <li><a href="#">Facial Treatments</a></li>
-            <li><a href="#">Manicure & Pedicure</a></li>
-            <li><a href="#">Hair Extensions</a></li>
-          </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section section-padding section-padding--alt-bg">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-title-tag">Get In Touch</span>
+                <h2>Contact Us</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Have questions or ready to book an appointment? Reach out to us!</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-details">
+                            <h4>Our Location</h4>
+                            <p>123 Beauty Lane, Suite 100<br>New York, NY 10001</p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="contact-details">
+                            <h4>Call Us</h4>
+                            <p><a href="tel:+11234567890">(123) 456-7890</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-details">
+                            <h4>Email Us</h4>
+                            <p><a href="mailto:info@elegancesalon.com">infoelegancesalon.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                        <div class="contact-details">
+                            <h4>Opening Hours</h4>
+                            <p>Mon-Fri: 9 AM - 8 PM<br>Sat-Sun: 10 AM - 6 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form (ngSubmit)="submitContactForm()" class="contact-form" #contactNgForm="ngForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">Your Name</label>
+                                <input type="text" id="contactName" name="contactName" placeholder="e.g. Jane Doe" [(ngModel)]="contactFormData.name" required #name="ngModel">
+                                <small *ngIf="name.invalid && (name.dirty || name.touched) && name.errors?.['required']" class="form-error-text">Name is required.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Your Email</label>
+                                <input type="email" id="contactEmail" name="contactEmail" placeholder="e.g. jane@example.com" [(ngModel)]="contactFormData.email" required email #email="ngModel">
+                                <small *ngIf="email.invalid && (email.dirty || email.touched)" class="form-error-text">
+                                    <span *ngIf="email.errors?.['required']">Email is required.</span>
+                                    <span *ngIf="email.errors?.['email']">Invalid email format.</span>
+                                </small>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactPhone">Your Phone</label>
+                                <input type="tel" id="contactPhone" name="contactPhone" placeholder="e.g. (123) 456-7890" [(ngModel)]="contactFormData.phone" required #phone="ngModel">
+                                <small *ngIf="phone.invalid && (phone.dirty || phone.touched) && phone.errors?.['required']" class="form-error-text">Phone is required.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactService">Select Service</label>
+                                <select id="contactService" name="contactService" [(ngModel)]="contactFormData.service" required #contactService="ngModel">
+                                    <option value="" disabled selected>-- Choose a Service --</option>
+                                    <option *ngFor="let service of services" [value]="service.name">{{ service.name }}</option>
+                                    <option value="other">Other Inquiry</option>
+                                </select>
+                                <small *ngIf="contactService.invalid && (contactService.dirty || contactService.touched) && contactService.errors?.['required']" class="form-error-text">Service selection is required.</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Your Message</label>
+                            <textarea id="contactMessage" name="contactMessage" rows="5" placeholder="Tell us more about your needs..." [(ngModel)]="contactFormData.message" required #message="ngModel"></textarea>
+                            <small *ngIf="message.invalid && (message.dirty || message.touched) && message.errors?.['required']" class="form-error-text">Message is required.</small>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--block" [disabled]="contactNgForm.invalid">Send Message</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="footer-newsletter">
-          <h4>Subscribe to Our Newsletter</h4>
-          <p>Stay updated with our latest offers and news</p>
-          <div class="newsletter-form">
-            <input type="email" placeholder="Your Email Address">
-            <button class="btn btn-primary">Subscribe</button>
-          </div>
-          <div class="social-icons">
-            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
-          </div>
+    </section>
+
+    <!-- Map Section
+    <section class="map-section">
+        <div class="map-container">
+            <iframe src="assets/saloon1.png" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Salon Location Map"></iframe>
         </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Elegance Salon. All Rights Reserved.</p>
-      </div>
+    </section> -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-main-content">
+            <div class="footer-column footer-column--about">
+                <div class="footer-logo">
+                    <img src="assets/saloon1.png" alt="Elegance Salon Logo">
+                    <h3>Elegance Salon</h3>
+                </div>
+                <p>Where style meets confidence. Discover the art of beauty with our expert team.</p>
+                <div class="footer-social-icons">
+                    <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" class="social-icon" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                </div>
+            </div>
+            <div class="footer-column footer-column--links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a (click)="scrollToSection('hero')" href="javascript:void(0);" class="nav-link">Home</a></li>
+                    <li><a (click)="scrollToSection('about')" href="javascript:void(0);" class="nav-link">About Us</a></li>
+                    <li><a (click)="scrollToSection('services')" href="javascript:void(0);" class="nav-link">Services</a></li>
+                    <li><a (click)="scrollToSection('gallery')" href="javascript:void(0);" class="nav-link">Gallery</a></li>
+                    <li><a (click)="scrollToSection('contact')" href="javascript:void(0);" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column footer-column--services">
+                <h4>Popular Services</h4>
+                <ul>
+                    <li *ngFor="let service of services | slice:0:4"><a (click)="openBookingModal(service.name)" href="javascript:void(0);">{{ service.name }}</a></li>
+                </ul>
+            </div>
+            <div class="footer-column footer-column--newsletter">
+                <h4>Stay Connected</h4>
+                <p>Subscribe for exclusive offers and beauty insights.</p>
+                <form class="footer-newsletter-form" (ngSubmit)="submitFooterNewsletter()" #footerNewsletterNgForm="ngForm">
+                    <input type="email" name="footerEmail" placeholder="Your Email" aria-label="Email for newsletter" [(ngModel)]="footerNewsletterEmail" required email #emailFooter="ngModel">
+                    <button type="submit" class="btn btn--primary" aria-label="Subscribe" [disabled]="footerNewsletterNgForm.invalid"><i class="fas fa-paper-plane"></i></button>
+                </form>
+                <div *ngIf="emailFooter.invalid && (emailFooter.dirty || emailFooter.touched)" class="form-error">
+                    <small *ngIf="emailFooter.errors?.['required']">Email is required.</small>
+                    <small *ngIf="emailFooter.errors?.['email']">Please enter a valid email.</small>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>© <span id="currentYear">{{ currentYear }}</span> Elegance Salon. All Rights Reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="booking-modal" [class.active]="showBookingModal">
+        <div class="booking-modal-overlay" (click)="closeBookingModal()"></div>
+        <div class="booking-modal-content">
+            <div class="booking-modal-header">
+                <h3>Book Your Appointment</h3>
+                <button class="booking-modal-close" aria-label="Close booking modal" (click)="closeBookingModal()">×</button>
+            </div>
+            <div class="booking-modal-body">
+                <form (ngSubmit)="submitBookingForm()" class="booking-form" #bookingNgForm="ngForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookingService">Select Service</label>
+                            <select id="bookingService" name="bookingService" [(ngModel)]="bookingData.service" required #bService="ngModel">
+                                <option value="" disabled>Choose a service</option>
+                                <option *ngFor="let service of services" [value]="service.name">{{ service.name }}</option>
+                            </select>
+                            <small *ngIf="bService.invalid && (bService.dirty || bService.touched) && bService.errors?.['required']" class="form-error-text">Service is required.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookingStylist">Select Stylist (Optional)</label>
+                            <select id="bookingStylist" name="bookingStylist" [(ngModel)]="bookingData.stylist">
+                                <option value="">Any available stylist</option>
+                                <option *ngFor="let member of team" [value]="member.name">{{ member.name }} ({{member.position}})</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookingDate">Select Date</label>
+                            <input type="date" id="bookingDate" name="bookingDate" [(ngModel)]="bookingData.date" required #bDate="ngModel" [min]="getMinBookingDate()">
+                            <small *ngIf="bDate.invalid && (bDate.dirty || bDate.touched) && bDate.errors?.['required']" class="form-error-text">Date is required.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookingTime">Select Time</label>
+                            <select id="bookingTime" name="bookingTime" [(ngModel)]="bookingData.time" required #bTime="ngModel">
+                                <option value="" disabled>Choose a time slot</option>
+                                <option *ngFor="let time of availableTimes" [value]="time">{{ time }}</option>
+                            </select>
+                            <small *ngIf="bTime.invalid && (bTime.touched || bTime.dirty) && bTime.errors?.['required']" class="form-error-text">Time is required.</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingName">Your Name</label>
+                        <input type="text" id="bookingName" name="bookingName" placeholder="Full Name" [(ngModel)]="bookingData.name" required #bName="ngModel">
+                        <small *ngIf="bName.invalid && (bName.dirty || bName.touched) && bName.errors?.['required']" class="form-error-text">Name is required.</small>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookingEmail">Email</label>
+                            <input type="email" id="bookingEmail" name="bookingEmail" placeholder="your@email.com" [(ngModel)]="bookingData.email" required email #bEmail="ngModel">
+                            <small *ngIf="bEmail.invalid && (bEmail.dirty || bEmail.touched)" class="form-error-text">
+                                <span *ngIf="bEmail.errors?.['required']">Email is required.</span>
+                                <span *ngIf="bEmail.errors?.['email']">Invalid email format.</span>
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookingPhone">Phone</label>
+                            <input type="tel" id="bookingPhone" name="bookingPhone" placeholder="(123) 456-7890" [(ngModel)]="bookingData.phone" required #bPhone="ngModel">
+                            <small *ngIf="bPhone.invalid && (bPhone.dirty || bPhone.touched) && bPhone.errors?.['required']" class="form-error-text">Phone is required.</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingNotes">Special Requests (Optional)</label>
+                        <textarea id="bookingNotes" name="bookingNotes" rows="3" placeholder="e.g., allergies, preferences" [(ngModel)]="bookingData.notes"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--block" [disabled]="bookingNgForm.invalid">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
     </div>
-  </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" [class.show]="showBackToTop" (click)="scrollToTop()" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 </div>

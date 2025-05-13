@@ -5,18 +5,27 @@
 
 /* Global Variables */
 :root {
-  --primary-color: #864AF9;
-  --secondary-color: #FCDC4D;
-  --accent-color: #FF7B54;
-  --dark-color: #2C3333;
-  --light-color: #FBFBFB;
-  --text-color: #333;
-  --text-light: #666;
-  --font-primary: 'Inter', sans-serif;
+  --font-primary: 'Poppins', sans-serif;
   --font-secondary: 'Playfair Display', serif;
+  --color-primary: #d4af37;
+  --color-primary-dark: #b08d2d;
+  --color-secondary: #a77f60;
+  --color-text: #e0e0e0;
+  --color-text-dark: #333333;
+  --color-headings: #ffffff;
+  --color-bg-dark: #1a1a1a;
+  --color-bg-medium: #2c2c2c;
+  --color-bg-light: #f8f5f0;
+  --color-border: #444444;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --navbar-height: 70px;
+  --section-padding: 80px;
   --border-radius: 8px;
-  --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  --transition-speed: 0.3s ease;
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --box-shadow-light: 0 5px 15px rgba(0,0,0,0.08);
+  --transition-speed: 0.3s;
+  --animation-duration: 600ms;
 }
 
 /* Add original body/global styles */

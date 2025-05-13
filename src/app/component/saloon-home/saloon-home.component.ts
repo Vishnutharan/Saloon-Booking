@@ -403,6 +403,10 @@ export class SaloonHomeComponent implements OnInit {
     return Array(Math.floor(rating)).fill(0);
   }
 
+  getEmptyStarArray(rating: number): number[] {
+    return Array(5 - Math.floor(rating)).fill(0);
+  }
+
   prevTestimonial(): void {
     this.activeTestimonialIndex = (this.activeTestimonialIndex - 1 + this.testimonials.length) % this.testimonials.length;
     this.resetTestimonialInterval();

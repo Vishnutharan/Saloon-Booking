@@ -80,7 +80,7 @@ export class SaloonHomeComponent implements OnInit {
       description:
         'Expert haircuts and styling services tailored to your unique look and preferences.',
       price: '$45+',
-      image: 'assets/saloon4.png',
+      image: 'assets/sc22.jpg',
       features: [
         'Consultation',
         'Wash',
@@ -110,7 +110,7 @@ export class SaloonHomeComponent implements OnInit {
       description:
         'Revitalizing facial treatments to rejuvenate your skin and leave you glowing.',
       price: '$70+',
-      image: 'assets/saloon5.png',
+      image: 'assets/sc23.jpg',
       features: [
         'Skin Analysis',
         'Deep Cleansing',
@@ -138,7 +138,7 @@ export class SaloonHomeComponent implements OnInit {
       name: 'Hair Extensions',
       description: 'High-quality hair extensions for added length and volume.',
       price: '$150+',
-      image: 'assets/saloon1.png',
+      image: 'assets/sc24.jpg',
       features: [
         'Consultation',
         'Custom Color Match',
@@ -167,7 +167,7 @@ export class SaloonHomeComponent implements OnInit {
     {
       id: 1,
       name: 'Sarah Johnson',
-      image: 'assets/saloon4.png',
+      image: 'assets/sc24.jpg',
       rating: 5,
       comment:
         'Absolutely love this salon! The staff is professional and my hair has never looked better. Highly recommend!',

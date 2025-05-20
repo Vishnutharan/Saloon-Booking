@@ -1,48 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { BookingService } from '../../Services/booking.service';
-import { BookingData } from '../../models/booking.model';
-import { AuthService } from '../../Services/AuthService';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css']
 })
-export class UserDashboardComponent implements OnInit {
-  bookings: BookingData[] = [];
-  loading = true;
-  errorMessage = '';
-
-  constructor(
-    private bookingService: BookingService,
-    private authService: AuthService
-  ) {}
-
-  ngOnInit(): void {
-    const currentUser = this.authService.currentUserValue;
-    if (currentUser && currentUser.userId) {
-      this.fetchUserBookings(currentUser.userId.toString());
-    } else {
-      this.errorMessage = 'User not logged in.';
-      this.loading = false;
-    }
-  }
-
-  fetchUserBookings(userId: string): void {
-    this.bookingService.getUserBookings(userId).subscribe({
-      next: (data: BookingData[]) => {
-        this.bookings = data;
-        this.loading = false;
-      },
-      error: (error: any) => {
-        this.errorMessage = 'Failed to load bookings.';
-        this.loading = false;
-      }
-    });
-  }
-
-  makePayment(booking: BookingData): void {
-    // Placeholder for payment logic, e.g., navigate to payment step or open payment modal
-    alert(`Initiate payment for booking of service: ${booking.service?.name}`);
-  }
+export class UserDashboardComponent {
+  // Sample data to show booking information, can be replaced by real data
+  bookings = [
+    { service: 'Haircut', date: '2025-05-22', time: '10:00 AM', status: 'Confirmed' },
+    { service: 'Facial', date: '2025-05-23', time: '02:00 PM', status: 'Pending' },
+    { service: 'Manicure', date: '2025-05-24', time: '01:00 PM', status: 'Cancelled' },
+  ];
 }

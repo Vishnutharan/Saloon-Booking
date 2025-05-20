@@ -6,6 +6,7 @@ import { HomeComponent } from './component/home/home.component';
 import { SaloonHomeComponent } from './component/saloon-home/saloon-home.component';
 import { BookingWizardComponent } from './component/booking-wizard/booking-wizard.component';
 import { AuthGuard } from './Guard/AuthGuard';
+import { UserDashboardComponent } from './component/user-dashboard/user-dashboard.component';
 
 // Configure router options to enable fragment navigation
 const routerOptions: ExtraOptions = {
@@ -28,6 +29,9 @@ const routes: Routes = [
   // Authentication routes
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+
+  { path: 'UserDash', component: UserDashboardComponent },
+
 
   // Booking routes (potentially protected with AuthGuard)
   { path: 'booking', component: BookingWizardComponent },

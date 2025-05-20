@@ -194,16 +194,17 @@ nav {
   justify-content: center;
   text-align: center;
   color: #fff;
-  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-  animation: fadeIn 1s ease-in;
+  background: url('/src/assets/Sc10.png') no-repeat center center/cover;
+  /* animation: fadeIn 1s ease-in; */
 }
+
 
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 0%;
+  height: 0%;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -215,16 +216,20 @@ nav {
   font-size: 48px;
   margin-bottom: 20px;
   animation: slideUp 0.8s ease-out;
+  color: #b89c7b;
+
 }
 
 .hero-content h2 {
   font-size: 24px;
   margin-bottom: 40px;
   animation: slideUp 1s ease-out;
+  color: #b89c7b;
 }
 
 .hero-buttons .btn {
   margin: 0 10px;
+  color: #b89c7b;
 }
 
 @keyframes fadeIn {
@@ -1248,13 +1253,16 @@ nav {
   position: relative;
   height: 100vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  align-items: center; /* Vertically center the content */
+  justify-content: center; /* Horizontally center the content */
+  text-align: center; /* Center the text */
   color: var(--white);
-  background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+  background: url('/assets/sc12.jpg') no-repeat center center; /* Ensure no repeat and center the image */
+  background-size: cover; /* Ensure the image covers the entire background */
   animation: fadeIn 1.5s ease-in;
+  padding: 20px; /* Optional padding if needed for spacing */
 }
+
 
 #hero::before {
   content: '';

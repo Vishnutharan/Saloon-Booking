@@ -1,26 +1,117 @@
-.booking-card {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-  background-color: #f9f9f9;
+/* Container for the whole dashboard */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.error {
-  color: red;
+/* Header styles */
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 40px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 18px;
+  color: #777;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+/* Table container */
+.booking-table {
+  margin-top: 40px;
+}
+
+.booking-table h2 {
+  font-size: 28px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 15px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+}
+
+th {
+  background-color: #f4f4f4;
   font-weight: bold;
-  margin: 1rem 0;
+  color: #555;
 }
 
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+td {
+  background-color: #fafafa;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Row hover effect */
+tbody tr:hover {
+  background-color: #f0f0f0;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #0056b3;
+/* Status colors */
+td.confirmed {
+  color: #28a745;
+  font-weight: 500;
+}
+
+td.pending {
+  color: #ff9800;
+  font-weight: 500;
+}
+
+td.cancelled {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+/* Media Query for responsiveness */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 15px;
+    margin: 20px;
+  }
+
+  .header h1 {
+    font-size: 32px;
+  }
+
+  .header p {
+    font-size: 16px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 12px;
+  }
 }

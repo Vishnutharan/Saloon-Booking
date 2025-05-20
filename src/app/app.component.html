@@ -1,1 +1,38 @@
-<app-saloon-home></app-saloon-home>
+<!-- Main Navigation Bar -->
+<header [ngClass]="{'scrolled': scrolled}" id="header">
+  <nav class="container">
+    <a [routerLink]="['/Shome']" fragment="hero" class="logo">
+      <img src="/assets/saloon5.png" alt="Elegance Salon Logo"> <span>Elegance Salon</span>
+    </a>
+    <ul class="nav-menu" [ngClass]="{'active': showMobileMenu}">
+      <li><a [routerLink]="['/Shome']" fragment="hero">Home</a></li>
+      <li><a [routerLink]="['/Shome']" fragment="about">About Us</a></li>
+      <li><a [routerLink]="['/Shome']" fragment="services">Services</a></li>
+      <li><a [routerLink]="['/Shome']" fragment="gallery">Gallery</a></li>
+      <li><a [routerLink]="['/Shome']" fragment="team">Our Team</a></li>
+      <li><a [routerLink]="['/Shome']" fragment="testimonials">Reviews</a></li>
+      <li><a [routerLink]="['/Shome']" fragment="contact">Contact</a></li>
+      
+      <!-- Authentication Links -->
+      <li><a routerLink="/login" class="nav-btn">Login</a></li>
+      <li><a routerLink="/register" class="nav-btn">Register</a></li>
+
+      <button class="close-menu-btn" *ngIf="showMobileMenu" (click)="toggleMobileMenu()">
+        <i class="fas fa-times"></i>
+      </button>
+    </ul>
+    
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+</header>
+
+<!-- Router Outlet for displaying the current route's component -->
+<router-outlet></router-outlet>
+
+<!-- Back to Top Button -->
+<button class="back-to-top-btn" *ngIf="showBackToTop" (click)="scrollToTop()">
+  <i class="fas fa-arrow-up"></i>
+</button>

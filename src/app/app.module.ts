@@ -23,6 +23,8 @@ import { BookingWizardComponent } from './component/booking-wizard/booking-wizar
 import { MessageBoxComponent } from './component/message-box/message-box.component';
 import { SaloonHomeComponent } from './component/saloon-home/saloon-home.component';
 
+import { UserDashboardComponent } from './component/user-dashboard/user-dashboard.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,8 @@ import { SaloonHomeComponent } from './component/saloon-home/saloon-home.compone
     StepPaymentComponent,
     StepConfirmationComponent,
     BookingWizardComponent,
-    SaloonHomeComponent
+    SaloonHomeComponent,
+    UserDashboardComponent
   ],
   imports: [
    BrowserModule,

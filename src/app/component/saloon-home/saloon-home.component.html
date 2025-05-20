@@ -1,26 +1,4 @@
-<header [ngClass]="{'scrolled': scrolled}" id="header">
-  <nav class="container">
-    <a (click)="scrollToSection('hero')" class="logo">
-      <img src="/assets/saloon5.png" alt="Elegance Salon Logo"> <span>Elegance Salon</span>
-    </a>
-    <ul class="nav-menu" [ngClass]="{'active': showMobileMenu}">
-      <li><a (click)="scrollToSection('hero')">Home</a></li>
-      <li><a (click)="scrollToSection('about')">About Us</a></li>
-      <li><a (click)="scrollToSection('services')">Services</a></li>
-      <li><a (click)="scrollToSection('gallery')">Gallery</a></li>
-      <li><a (click)="scrollToSection('team')">Our Team</a></li>
-      <li><a (click)="scrollToSection('testimonials')">Reviews</a></li>
-      <li><a (click)="scrollToSection('contact')">Contact</a></li>
-      <button class="close-menu-btn" *ngIf="showMobileMenu" (click)="toggleMobileMenu()">
-        <i class="fas fa-times"></i>
-      </button>
-    </ul>
-    <button class="mobile-menu-toggle" (click)="toggleMobileMenu()">
-      <i class="fas fa-bars"></i>
-    </button>
-  </nav>
-</header>
-
+<!-- SaloonHomeComponent template - without navigation header -->
 <main>
   <section id="hero" class="hero-section">
     <div class="hero-overlay"></div>
@@ -87,6 +65,7 @@
     </div>
   </section>
 
+  <!-- Remaining sections unchanged -->
   <section id="stats" class="stats-section section-padding">
     <div class="container">
       <div class="stats-grid">
@@ -320,7 +299,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-col">
-        <a (click)="scrollToSection('hero')" class="footer-logo">
+        <a href="#hero" class="footer-logo">
           <img src="/assets/saloon5.png" alt="Elegance Salon Logo"> <span>Elegance Salon</span>
         </a>
         <p>Experience beauty and confidence at Elegance Salon. Your journey to a stunning new you starts here.</p>
@@ -334,18 +313,19 @@
       <div class="footer-col">
         <h4>Quick Links</h4>
         <ul>
-          <li><a (click)="scrollToSection('hero')">Home</a></li>
-          <li><a (click)="scrollToSection('about')">About Us</a></li>
-          <li><a (click)="scrollToSection('services')">Services</a></li>
-          <li><a (click)="scrollToSection('gallery')">Gallery</a></li>
-          <li><a (click)="scrollToSection('contact')">Contact</a></li>
-          <li><a (click)="scrollToSection('blog')">Blog</a></li>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#blog">Blog</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Popular Services</h4>
         <ul>
-          <li *ngFor="let service of services.slice(0,4)"> <a (click)="openBookingModal(service.name)">{{ service.name }}</a>
+          <li *ngFor="let service of services.slice(0,4)"> 
+            <a href="#services" (click)="openBookingModal(service.name)">{{ service.name }}</a>
           </li>
         </ul>
       </div>
@@ -366,6 +346,7 @@
   </div>
 </footer>
 
+<!-- Booking Modal -->
 <div class="modal-overlay" *ngIf="showBookingModal" (click)="closeBookingModal()"></div>
 <div class="booking-modal" *ngIf="showBookingModal">
   <div class="modal-content">
@@ -419,7 +400,3 @@
     </form>
   </div>
 </div>
-
-<button class="back-to-top-btn" *ngIf="showBackToTop" (click)="scrollToTop()">
-  <i class="fas fa-arrow-up"></i>
-</button>

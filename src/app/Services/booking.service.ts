@@ -25,6 +25,10 @@ export class BookingService {
     this.apiUrl = `${environment.apiUrl}${environment.endpoints.booking}`;
   }
 
+  getUserBookings(userId: string): Observable<BookingData[]> {
+    return this.http.get<BookingData[]>(`${this.apiUrl}/user/${userId}/bookings`);
+  }
+
   private getClonedInitialData(): BookingData {
     // Deep clone to avoid modifying the original constant
     return JSON.parse(JSON.stringify(initialBookingData));

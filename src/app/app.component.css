@@ -1,89 +1,215 @@
-/* Custom Global Styles */
-html, body {
+/* Global Styles */
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
   box-sizing: border-box;
 }
 
-.bg-gradient-to-r {
-  background-size: 200% 200%;
-}
-
-.bg-gradient-to-r.from-purple-600 {
-  background-position: 0% 50%;
-}
-
-.bg-gradient-to-r.to-orange-400 {
-  background-position: 100% 50%;
-}
-
-.bg-gradient-to-r:hover {
-  animation: gradientShift 3s ease infinite;
-}
-
-/* Keyframe for smooth background gradient animation */
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-button {
+body {
   font-family: 'Arial', sans-serif;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* Shadow Effect for Button */
-button:hover {
-  transform: scale(1.05);
+/* Header Styles */
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  padding: 10px 0;
+  z-index: 999;
+  transition: background-color 0.3s ease;
 }
 
-/* Hover gradient effects */
-button:hover {
+#header.scrolled {
+  background-color: #444;
+}
+
+/* Navigation Bar Container */
+nav.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+nav .logo {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+nav .logo img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+nav .logo span {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.nav-menu li {
+  list-style: none;
+}
+
+.nav-menu a {
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding: 10px 15px;
+  position: relative;
+}
+
+.nav-menu a:hover {
+  color: #f39c12;
+  transform: translateY(-5px);
+}
+
+.nav-menu a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background-color: #f39c12;
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-menu a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
   cursor: pointer;
 }
 
-button:active {
-  transform: scale(1);
+/* Mobile Menu Styles */
+.nav-menu.active {
+  display: block;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 250px;
+  background-color: #333;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
 }
 
-/* Make navbar background semi-transparent with shadow */
-nav {
-  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
-  padding: 1.5rem; /* Adjusting padding for better spacing */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+.nav-menu.active li {
+  text-align: right;
 }
 
-/* Main content padding */
-main {
-  background-color: #fff;
-  padding: 2rem;
+.nav-menu.active a {
+  font-size: 20px;
+  padding: 15px;
+  border-bottom: 1px solid #444;
 }
 
-/* Button styles for a gradient effect */
-button {
-  padding: 0.75rem 1.5rem;
-  background-image: linear-gradient(to right, #3b82f6, #2563eb); /* Default blue gradient */
+/* Hover effect for mobile */
+.nav-menu.active a:hover {
+  background-color: #444;
+  color: #f39c12;
+}
+
+/* Close Menu Button */
+.close-menu-btn {
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
   color: white;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  text-transform: uppercase;
+  font-size: 30px;
+  cursor: pointer;
 }
 
-/* Gradient hover effects for buttons */
-button:hover {
-  background-image: linear-gradient(to right, #2563eb, #3b82f6); /* Reverse gradient on hover */
+/* Back to Top Button */
+.back-to-top-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #f39c12;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
 
-/* Focus effect for buttons */
-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.5); /* Focus state */
+.back-to-top-btn:hover {
+  transform: scale(1.1);
+}
+
+.back-to-top-btn i {
+  font-size: 20px;
+}
+
+/* Animations for the back-to-top button */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .nav-menu.active {
+    display: block;
+  }
+
+  .nav-menu li {
+    margin: 10px 0;
+  }
+
+  .nav-menu a {
+    font-size: 18px;
+  }
 }

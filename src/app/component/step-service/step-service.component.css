@@ -1,0 +1,223 @@
+/* Base variables */
+:root {
+  --primary: #3B82F6;
+  --secondary: #6366F1;
+  --accent: #10B981;
+  --light: #F9FAFB;
+  --dark: #1F2937;
+  --border-radius: 12px;
+  --transition: all 0.3s ease-in-out;
+}
+
+.step {
+  background: #ffffff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  max-width: 800px;
+  margin: 2rem auto;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-title {
+  font-size: 1.75rem;
+  color: var(--dark);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #E5E7EB;
+  font-weight: 700;
+}
+
+/* Service Cards Grid */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Service Card Styles */
+.service-card {
+  background: var(--light);
+  border-radius: var(--border-radius);
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(to right, #F3F4F6, #F9FAFB);
+  border-color: var(--primary);
+}
+
+.service-card.selected {
+  border-color: var(--accent);
+  background: linear-gradient(to right, #ECFDF5, #F0FDF4);
+}
+
+.service-card.selected::after {
+  content: "✓";
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Service Details */
+.service-details {
+  background: #F3F4F6;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  min-height: 120px;
+  border: 1px solid #E5E7EB;
+  transition: var(--transition);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.service-details h4 {
+  color: var(--dark);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Error Message */
+.error-message {
+  min-height: 1.25rem;
+  color: #EF4444;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+/* Navigation Button */
+.btn-primary {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(59, 132, 255, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 132, 255, 0.4);
+}
+
+.btn-primary:disabled {
+  background: #D1D5DB;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-primary:hover:not(:disabled) svg {
+  transform: translateX(3px);
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .step {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .service-card {
+    padding: 1rem;
+  }
+
+  .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Loading State Animation */
+.loading-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #E5E7EB;
+  border-radius: var(--border-radius);
+}
+
+.loading-skeleton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50%;
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0)
+  );
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    left: -50%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Additional Hover Effects */
+.service-card h3 {
+  transition: color 0.3s ease;
+}
+
+.service-card:hover h3 {
+  color: var(--primary);
+}
+
+/* Focus States */
+.service-card:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+}
+
+/* Animated Checkmark */
+@keyframes checkmark {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+.service-card.selected::after {
+  animation: checkmark 0.3s ease;
+}

@@ -2,23 +2,21 @@
   <h1 class="booking-title">Saloon Booking</h1>
 
   <!-- Global Message Box -->
-  <app-message-box></app-message-box>
-
-  <!-- Progress Bar -->
-  <app-progress-bar [currentStep]="currentStep" [totalSteps]="totalSteps"></app-progress-bar>
-
+ 
   <!-- Step Content Area -->
-  <div class="step-container" [ngSwitch]="currentStep">
-    <app-step-service *ngSwitchCase="1" (next)="nextStep()"></app-step-service>
-    <app-step-time *ngSwitchCase="2" (next)="nextStep()" (previous)="prevStep()"></app-step-time>
-    <app-step-seat *ngSwitchCase="3" (next)="nextStep()" (previous)="prevStep()"></app-step-seat>
-    <app-step-details *ngSwitchCase="4" (next)="nextStep()" (previous)="prevStep()"></app-step-details>
-    <app-step-payment *ngSwitchCase="5" (next)="nextStep()" (previous)="prevStep()"></app-step-payment>
-    <app-step-confirmation *ngSwitchCase="6" (newBooking)="startNewBooking()"></app-step-confirmation>
+  <div class="booking-steps-container">
+    <div class="step-container" [ngSwitch]="currentStep">
+      <app-step-service *ngSwitchCase="1" (next)="nextStep()"></app-step-service>
+      <app-step-time *ngSwitchCase="2" (next)="nextStep()" (previous)="prevStep()"></app-step-time>
+      <app-step-seat *ngSwitchCase="3" (next)="nextStep()" (previous)="prevStep()"></app-step-seat>
+      <app-step-details *ngSwitchCase="4" (next)="nextStep()" (previous)="prevStep()"></app-step-details>
+      <app-step-payment *ngSwitchCase="5" (next)="nextStep()" (previous)="prevStep()"></app-step-payment>
+      <app-step-confirmation *ngSwitchCase="6" (newBooking)="startNewBooking()"></app-step-confirmation>
 
-    <!-- Default case -->
-    <div *ngSwitchDefault class="step-default">
-      Loading step...
+      <!-- Default case -->
+      <div *ngSwitchDefault class="step-default">
+        Loading step...
+      </div>
     </div>
   </div>
 </div>

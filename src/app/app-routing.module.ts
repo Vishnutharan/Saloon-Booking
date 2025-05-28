@@ -7,6 +7,13 @@ import { SaloonHomeComponent } from './component/saloon-home/saloon-home.compone
 import { BookingWizardComponent } from './component/booking-wizard/booking-wizard.component';
 import { AuthGuard } from './Guard/AuthGuard';
 import { UserDashboardComponent } from './component/user-dashboard/user-dashboard.component';
+import { StepDetailsComponent } from './component/step-details/step-details.component';
+import { MessageBoxComponent } from './component/message-box/message-box.component';
+import { ProgressBarComponent } from './component/progress-bar/progress-bar.component';
+import { StepConfirmationComponent } from './component/step-confirmation/step-confirmation.component';
+import { StepPaymentComponent } from './component/step-payment/step-payment.component';
+import { StepSeatComponent } from './component/step-seat/step-seat.component';
+import { StepTimeComponent } from './component/step-time/step-time.component';
 
 // Configure router options to enable fragment navigation
 const routerOptions: ExtraOptions = {
@@ -34,9 +41,17 @@ const routes: Routes = [
 
 
   // Booking routes (potentially protected with AuthGuard)
-  { path: 'booking', component: BookingWizardComponent },
+  { path: 'bookingwizard', component: BookingWizardComponent },
   { path: 'country', component: BookingWizardComponent },
-  
+  { path: 'stepdetails', component: StepDetailsComponent },
+  { path: 'messagebox', component: MessageBoxComponent },
+  { path: 'progressbar', component: ProgressBarComponent },
+  { path: 'stepconfirmation', component: StepConfirmationComponent },
+  { path: 'steppayment', component: StepPaymentComponent },
+  { path: 'stepseat', component: StepSeatComponent },
+  { path: 'steptime', component: StepTimeComponent },
+
+
   // Fallback route
   { path: '**', redirectTo: '/Shome' }
 ];

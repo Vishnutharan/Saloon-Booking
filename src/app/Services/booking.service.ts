@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { BookingData, UserInfo } from '../models/booking.model';
-import { initialBookingData } from '../models/booking.model';
-import { PaymentDetails } from '../models/booking.model';
+import { BookingData, UserInfo } from '../Models/booking.model';
+import { initialBookingData } from '../Models/booking.model';
+import { PaymentDetails } from '../Models/booking.model';
 
-import { Service } from '../models/service.model';
+import { Service } from '../Models/service.model';
 import { environment } from '../Environment/environment';
 import { DataService } from './data.service';
 

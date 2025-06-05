@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://localhost:7281/api',
+  stripePublicKey: 'your-publishable-key',
   endpoints: {
     auth: '/auth',
     booking: '/booking',
@@ -12,6 +13,7 @@ export const environment = {
 export const environmentProd = {
   production: true,
   apiUrl: 'https://api.yoursaloonapp.com/api',
+  stripePublicKey: 'your-publishable-key',
   endpoints: {
     auth: '/auth',
     booking: '/booking',

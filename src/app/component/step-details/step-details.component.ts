@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { BookingService } from '../../Services/booking.service';
-import { UserInfo } from '../../models/booking.model';
+import { UserInfo } from '../../Models/booking.model';
 
 @Component({
   selector: 'app-step-details',

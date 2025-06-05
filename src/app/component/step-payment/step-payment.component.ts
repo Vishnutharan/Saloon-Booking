@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { BookingService } from '../../Services/booking.service';
-import { BookingData, PaymentDetails } from '../../models/booking.model';
+import { BookingData, PaymentDetails } from '../../Models/booking.model';
 import { MessageService } from 'src/app/Services/message.service';
+import { loadStripe, Stripe, StripeCardElement } from '@stripe/stripe-js';
+import { environment } from '../../Environment/environment';
 
 @Component({
   selector: 'app-step-payment',
@@ -18,6 +20,8 @@ export class StepPaymentComponent implements OnInit, OnDestroy {
   bookingData: BookingData | null = null;
   showCreditCardDetails = false;
   formErrorMessage = '';
+  stripe: Stripe | null = null;
+  cardElement: StripeCardElement | null = null;
 
   private bookingSubscription: Subscription | undefined;
   private paymentMethodSubscription: Subscription | undefined;
@@ -29,9 +33,6 @@ export class StepPaymentComponent implements OnInit, OnDestroy {
   ) {
     this.paymentForm = this.fb.group({
       paymentMethod: ['creditCard', Validators.required], // Default to credit card
-      cardNumber: [''],
-      cardExpiry: [''],
-      cardCVC: ['']
     });
   }
 
@@ -51,6 +52,7 @@ export class StepPaymentComponent implements OnInit, OnDestroy {
           this.bookingService.updatePaymentDetails({...currentPaymentDetails, amount: data.service.price });
       }
     });
+    this.initializeStripe();
 
     this.paymentMethodSubscription = this.paymentForm.get('paymentMethod')?.valueChanges.subscribe(value => {
       this.updateValidators(value);
@@ -66,32 +68,26 @@ export class StepPaymentComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.bookingSubscription?.unsubscribe();
     this.paymentMethodSubscription?.unsubscribe();
+    this.cardElement?.unmount();
   }
 
   updateValidators(paymentMethod: string): void {
-    const cardNumberControl = this.paymentForm.get('cardNumber');
-    const cardExpiryControl = this.paymentForm.get('cardExpiry');
-    const cardCVCControl = this.paymentForm.get('cardCVC');
+    // Validators handled by Stripe Elements
+  }
 
-    if (paymentMethod === 'creditCard') {
-      cardNumberControl?.setValidators([Validators.required, Validators.pattern(/^\d{13,16}$/)]);
-      cardExpiryControl?.setValidators([Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/)]);
-      cardCVCControl?.setValidators([Validators.required, Validators.pattern(/^\d{3,4}$/)]);
-    } else {
-      cardNumberControl?.clearValidators();
-      cardExpiryControl?.clearValidators();
-      cardCVCControl?.clearValidators();
+  private async initializeStripe() {
+    this.stripe = await loadStripe(environment.stripePublicKey);
+    if (!this.stripe) {
+      console.error('Stripe failed to load');
+      return;
     }
-    cardNumberControl?.updateValueAndValidity();
-    cardExpiryControl?.updateValueAndValidity();
-    cardCVCControl?.updateValueAndValidity();
+    const elements = this.stripe.elements();
+    this.cardElement = elements.create('card');
+    this.cardElement.mount('#card-element');
   }
 
   // Form control getters
   get paymentMethod() { return this.paymentForm.get('paymentMethod'); }
-  get cardNumber() { return this.paymentForm.get('cardNumber'); }
-  get cardExpiry() { return this.paymentForm.get('cardExpiry'); }
-  get cardCVC() { return this.paymentForm.get('cardCVC'); }
 
    getSlotEndTime(startTime: string | null): string {
     if (!startTime) return '';
@@ -115,18 +111,34 @@ export class StepPaymentComponent implements OnInit, OnDestroy {
     const paymentData: PaymentDetails = {
       method: this.paymentMethod?.value,
       amount: this.bookingData?.service?.price ?? 0,
-      cardNumber: this.cardNumber?.value,
-      cardExpiry: this.cardExpiry?.value,
-      cardCVC: this.cardCVC?.value
     };
     this.bookingService.updatePaymentDetails(paymentData);
 
-    // Simulate payment processing
-    console.log('Processing payment (mock)...', paymentData);
-    this.messageService.showMessage('Payment processed successfully (Mock)!', 'success');
+    if (!this.stripe || !this.cardElement) {
+      this.messageService.showMessage('Payment system not initialized.', 'error');
+      return;
+    }
 
-    // In a real app, wait for API response before proceeding
-    this.next.emit();
+    fetch('/create-payment-intent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount: paymentData.amount * 100, currency: 'usd' })
+    })
+    .then(res => res.json())
+    .then(async data => {
+      const { error } = await this.stripe!.confirmCardPayment(data.clientSecret, {
+        payment_method: {
+          card: this.cardElement!,
+        }
+      });
+      if (error) {
+        this.messageService.showMessage(error.message || 'Payment failed', 'error');
+      } else {
+        this.messageService.showMessage('Payment successful!', 'success');
+        this.next.emit();
+      }
+    })
+    .catch(() => this.messageService.showMessage('Payment error', 'error'));
   }
 
   goBack(): void {

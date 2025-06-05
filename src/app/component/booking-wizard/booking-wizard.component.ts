@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRe
 import { Subscription } from 'rxjs';
 import { BookingService } from '../../Services/booking.service';
 import { MessageService } from '../../Services/message.service';
-import { BookingData } from '../../models/booking.model';
+import { BookingData } from '../../Models/booking.model';
 
 @Component({
   selector: 'app-booking-wizard',

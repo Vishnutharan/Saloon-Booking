@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, Subscription } from 'rxjs';
-import { Service } from '../../models/service.model';
-import { BookingData } from '../../models/booking.model';
+import { Service } from '../../Models/service.model';
+import { BookingData } from '../../Models/booking.model';
 import { BookingService } from '../../Services/booking.service';
 import { DataService } from 'src/app/Services/data.service';
 

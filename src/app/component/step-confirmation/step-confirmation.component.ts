@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { BookingService } from '../../Services/booking.service';
-import { BookingData } from '../../models/booking.model';
+import { BookingData } from '../../Models/booking.model';
 
 @Component({
   selector: 'app-step-confirmation',
